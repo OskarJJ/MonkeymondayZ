@@ -19,7 +19,7 @@ public class GPSActivity extends ActionBarActivity implements LocationListener {
 
         LocationManager lMgr = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         //lMgr.req
-        lMgr.requestLocationUpdates(LocationManager.GPS_PROVIDER,this);
+        lMgr.requestLocationUpdates(LocationManager.GPS_PROVIDER,5000,10,this);
     }
 
 
