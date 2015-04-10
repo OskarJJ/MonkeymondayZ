@@ -20,7 +20,7 @@ public class GPSActivity extends ActionBarActivity implements LocationListener {
 
         LocationManager lMgr = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         //lMgr.req
-        lMgr.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,this);
+        lMgr.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,500,0,this);
     }
 
 
@@ -49,21 +49,27 @@ public class GPSActivity extends ActionBarActivity implements LocationListener {
     @Override
     public void onLocationChanged(Location location) {
         TextView txtLoc = (TextView) findViewById(R.id.txtGPS);
+        System.out.println("onLocationChanged()");
         txtLoc.setText(location.toString());
     }
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
-
+        System.out.println("onStatusChanged()");
     }
 
     @Override
     public void onProviderEnabled(String provider) {
+        TextView txtLoc = (TextView) findViewById(R.id.txtGPS);
 
+        txtLoc.setText("Provider enabled");
+        System.out.println("Provider enabled");
     }
 
     @Override
     public void onProviderDisabled(String provider) {
-
+        TextView txtLoc = (TextView) findViewById(R.id.txtGPS);
+    txtLoc.setText("Provider disabled");
+    System.out.println("Provider disabled");
     }
 }
