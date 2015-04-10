@@ -25,4 +25,14 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:onClick="goACCEL"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Light"
+        android:id="@+id/buttonlight"
+        android:layout_below="@+id/buttonaccel"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="69dp"
+        android:onClick="goLight"/>
 </RelativeLayout>
