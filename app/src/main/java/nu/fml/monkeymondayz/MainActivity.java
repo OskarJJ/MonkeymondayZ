@@ -32,6 +32,10 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(this, ACCELActivity.class);
         startActivity(intent);
     }
+    public void goLight(View view) {
+        Intent intent = new Intent(this, LightActivity.class);
+        startActivity(intent);
+    }
 
 
     @Override
