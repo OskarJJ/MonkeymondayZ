@@ -19,8 +19,20 @@ public class GPSActivity extends ActionBarActivity implements LocationListener {
         setContentView(R.layout.activity_gps);
 
         LocationManager lMgr = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        //lMgr.req
-        lMgr.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,500,0,this);
+        TextView txtDebug = (TextView) findViewById(R.id.txtDebug);
+        //if (lMgr.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+          //  lMgr.requestLocationUpdates(LocationManager.GPS_PROVIDER,10,0,this);
+           // txtDebug.setText("Using GPS provider");
+        //}else
+        if (lMgr.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+            lMgr.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,10,0,this);
+            txtDebug.setText("Using network provider");
+        }else{
+            System.out.println("No provider is enabled");
+            txtDebug.setText("No location provider is enabled");
+        }
+
+
     }
 
 
