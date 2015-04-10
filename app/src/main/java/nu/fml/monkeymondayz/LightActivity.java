@@ -8,6 +8,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -15,19 +16,17 @@ import android.widget.TextView;
 
 public class LightActivity extends Activity implements SensorEventListener {
     private SensorManager mSensorManager;
-    private Sensor mPressure;
+    private Sensor mLightSensor;
+    private float mLux = 0.0f;
     private TextView text1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_light);
 
-        // Get an instance of the sensor service, and use that to get an instance of
-        // a particular sensor.
-        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        mPressure = mSensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE);
-
-
+        mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        mLightSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
     }
 
 
@@ -53,13 +52,24 @@ public class LightActivity extends Activity implements SensorEventListener {
         return super.onOptionsItemSelected(item);
     }
 
+
+
     @Override
     public void onSensorChanged(SensorEvent event) {
-        float millibars_of_pressure = event.values[0];
+        if (event.sensor.getType() == Sensor.TYPE_LIGHT) {
+            mLux = event.values[0];
+            String luxStr = String.valueOf(mLux);
+            TextView tv = (TextView) findViewById(R.id.text1);
+            tv.setText(luxStr);
+            Log.d("LUXTAG", "Lux value: " + event.values[0]);
 
-        text1.setText(Float.toString(millibars_of_pressure));
-
+        }
     }
+
+
+
+
+
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
@@ -67,15 +77,15 @@ public class LightActivity extends Activity implements SensorEventListener {
     }
     @Override
     protected void onResume() {
-        // Register a listener for the sensor.
         super.onResume();
-        mSensorManager.registerListener(this, mPressure, SensorManager.SENSOR_DELAY_NORMAL);
+        mSensorManager.registerListener(this, mLightSensor,
+                SensorManager.SENSOR_DELAY_FASTEST);
     }
 
     @Override
     protected void onPause() {
-        // Be sure to unregister the sensor when the activity pauses.
-        super.onPause();
         mSensorManager.unregisterListener(this);
+        super.onPause();
     }
+
 }
