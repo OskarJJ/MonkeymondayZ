@@ -18,7 +18,7 @@ public class GPSActivity extends ActionBarActivity implements LocationListener {
         setContentView(R.layout.activity_gps);
 
         LocationManager lMgr = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        LocationListener lLstr = new
+        //LocationListener lLstr = new
     }
 
 
