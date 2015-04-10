@@ -1,17 +1,24 @@
 package nu.fml.monkeymondayz;
 
+import android.content.Context;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class GPSActivity extends ActionBarActivity {
+public class GPSActivity extends ActionBarActivity implements LocationListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gps);
+
+        LocationManager lMgr = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        LocationListener lLstr = new
     }
 
 

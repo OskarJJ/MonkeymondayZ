@@ -7,3 +7,14 @@
 .idea
 .idea/misc.xml
 .idea/modules.xml
+*.iml
+*.iws
+*.ipr
+.idea/
+.gradle/
+local.properties
+
+*/build/
+
+*~
+*.swp
