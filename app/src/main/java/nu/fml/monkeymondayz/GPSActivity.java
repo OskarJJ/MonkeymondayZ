@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 
 public class GPSActivity extends ActionBarActivity implements LocationListener {
@@ -19,7 +20,7 @@ public class GPSActivity extends ActionBarActivity implements LocationListener {
 
         LocationManager lMgr = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         //lMgr.req
-        lMgr.requestLocationUpdates(LocationManager.GPS_PROVIDER,5000,10,this);
+        lMgr.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,this);
     }
 
 
@@ -47,7 +48,8 @@ public class GPSActivity extends ActionBarActivity implements LocationListener {
 
     @Override
     public void onLocationChanged(Location location) {
-
+        TextView txtLoc = (TextView) findViewById(R.id.txtGPS);
+        txtLoc.setText(location.toString());
     }
 
     @Override
