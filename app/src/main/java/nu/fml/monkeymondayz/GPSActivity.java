@@ -18,7 +18,8 @@ public class GPSActivity extends ActionBarActivity implements LocationListener {
         setContentView(R.layout.activity_gps);
 
         LocationManager lMgr = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        //LocationListener lLstr = new
+        //lMgr.req
+        lMgr.requestLocationUpdates(LocationManager.GPS_PROVIDER,this);
     }
 
 
@@ -42,5 +43,25 @@ public class GPSActivity extends ActionBarActivity implements LocationListener {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
     }
 }
