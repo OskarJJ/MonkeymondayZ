@@ -1,6 +1,7 @@
 package nu.fml.monkeymondayz;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -8,6 +9,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 
@@ -83,5 +85,10 @@ public class GPSActivity extends ActionBarActivity implements LocationListener {
         TextView txtLoc = (TextView) findViewById(R.id.txtGPS);
     txtLoc.setText("Provider disabled");
     System.out.println("Provider disabled");
+    }
+
+    public void openMap(View v) {
+        Intent intent = new Intent(this, GpsMapActivity.class);
+        startActivity(intent);
     }
 }
