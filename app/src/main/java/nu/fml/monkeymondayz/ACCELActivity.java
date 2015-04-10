@@ -1,12 +1,16 @@
 package nu.fml.monkeymondayz;
 
+import android.app.Activity;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class ACCELActivity extends ActionBarActivity {
+public class ACCELActivity extends Activity implements SensorEventListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,5 +39,15 @@ public class ACCELActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
     }
 }

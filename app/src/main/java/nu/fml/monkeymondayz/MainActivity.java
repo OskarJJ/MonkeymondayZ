@@ -29,7 +29,7 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
     public void goACCEL(View view) {
-        Intent intent = new Intent(this, AccelerateActivity.class);
+        Intent intent = new Intent(this, ACCELActivity.class);
         startActivity(intent);
     }
 
