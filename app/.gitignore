@@ -13,8 +13,6 @@
 .idea/
 .gradle/
 local.properties
-
 */build/
-
 *~
 *.swp
