@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
                 boolean hasGPSLocation = p.hasSystemFeature(PackageManager.FEATURE_LOCATION_GPS);
                 boolean hasNetworkLocation = p.hasSystemFeature(PackageManager.FEATURE_LOCATION_NETWORK);
 
-                SharedPreferences settings = getSharedPreferences("sensors", 0);
+                SharedPreferences settings = getSharedPreferences(Constants.AVAILABLE_SENSORS, 0);
                 SharedPreferences.Editor editor = settings.edit();
 
                 editor.putBoolean(Constants.PREF_ACCELEROMETER, hasAccelerometer);

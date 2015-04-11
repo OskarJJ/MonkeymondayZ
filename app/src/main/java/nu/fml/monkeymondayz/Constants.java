@@ -4,6 +4,8 @@ package nu.fml.monkeymondayz;
  * Created by Hawry on 2015-04-11.
  */
 public class Constants {
+    public static String AVAILABLE_SENSORS = "sensors";
+
     public static String PREF_ACCELEROMETER = "accelerometer";
     public static String PREF_GYROSCOPE = "gyroscope";
     public static String PREF_LIGHT = "light";
