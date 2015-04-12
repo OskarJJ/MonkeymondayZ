@@ -2,6 +2,7 @@ package nu.fml.monkeymondayz;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -22,12 +23,14 @@ public class GPSActivity extends ActionBarActivity implements LocationListener {
 
         LocationManager lMgr = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         TextView txtDebug = (TextView) findViewById(R.id.txtDebug);
-        //if (lMgr.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-          //  lMgr.requestLocationUpdates(LocationManager.GPS_PROVIDER,10,0,this);
-           // txtDebug.setText("Using GPS provider");
-        //}else
-        if (lMgr.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-            lMgr.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,10,0,this);
+
+        SharedPreferences settings = getSharedPreferences(Constants.AVAILABLE_SENSORS,0);
+
+        if (settings.getBoolean(Constants.PREF_LOCATION_GPS,false)) {
+            lMgr.requestLocationUpdates(LocationManager.GPS_PROVIDER,10,1,this);
+            txtDebug.setText("Using GPS");
+        }else if (settings.getBoolean(Constants.PREF_LOCATION_NETWORK,false)) {
+            lMgr.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,10,1,this);
             txtDebug.setText("Using network provider");
         }else{
             System.out.println("No provider is enabled");

@@ -2,6 +2,10 @@ package nu.fml.monkeymondayz;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,7 +18,50 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_splash);
+
+        final Handler handler = new Handler();
+
+        new AsyncTask<Void,Void,Void>() {
+            protected Void doInBackground(Void... params) {
+                PackageManager p = getPackageManager();
+                boolean hasAccelerometer = p.hasSystemFeature(PackageManager.FEATURE_SENSOR_ACCELEROMETER);
+                boolean hasGyroscope = p.hasSystemFeature(PackageManager.FEATURE_SENSOR_GYROSCOPE);
+                boolean hasLight = p.hasSystemFeature(PackageManager.FEATURE_SENSOR_LIGHT);
+                boolean hasMicrophone = p.hasSystemFeature(PackageManager.FEATURE_MICROPHONE);
+                boolean hasGPSLocation = p.hasSystemFeature(PackageManager.FEATURE_LOCATION_GPS);
+                boolean hasNetworkLocation = p.hasSystemFeature(PackageManager.FEATURE_LOCATION_NETWORK);
+
+                SharedPreferences settings = getSharedPreferences(Constants.AVAILABLE_SENSORS, 0);
+                SharedPreferences.Editor editor = settings.edit();
+
+                editor.putBoolean(Constants.PREF_ACCELEROMETER, hasAccelerometer);
+                editor.putBoolean(Constants.PREF_GYROSCOPE, hasGyroscope);
+                editor.putBoolean(Constants.PREF_LIGHT, hasLight);
+                editor.putBoolean(Constants.PREF_MICROPHONE, hasMicrophone);
+                editor.putBoolean(Constants.PREF_LOCATION_GPS, hasGPSLocation);
+                editor.putBoolean(Constants.PREF_LOCATION_NETWORK, hasNetworkLocation);
+
+                editor.commit();
+                System.out.println(hasAccelerometer + "," + hasGyroscope + "," + hasLight + "," + hasMicrophone + "," + hasGPSLocation + "," + hasNetworkLocation);
+
+                try {
+                    Thread.sleep(4000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            public void onPostExecute(Void result) {
+                handler.post(new Runnable() {
+                    public void run() {
+                        setContentView(R.layout.activity_main);
+                    }
+                });
+            }
+
+        }.execute();
     }
 
 
