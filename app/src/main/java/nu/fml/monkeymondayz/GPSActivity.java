@@ -11,11 +11,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 
 public class GPSActivity extends ActionBarActivity implements LocationListener {
-
+    private Button btnOpen;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,8 +26,9 @@ public class GPSActivity extends ActionBarActivity implements LocationListener {
         TextView txtDebug = (TextView) findViewById(R.id.txtDebug);
 
         SharedPreferences settings = getSharedPreferences(Constants.AVAILABLE_SENSORS,0);
-
-        if (settings.getBoolean(Constants.PREF_LOCATION_GPS,false)) {
+        btnOpen = (Button) findViewById(R.id.btnOpenMap);
+        btnOpen.setEnabled(true);
+        if (settings.getBoolean(Constants.PREF_LOCATION_GPS, false)) {
             lMgr.requestLocationUpdates(LocationManager.GPS_PROVIDER,10,1,this);
             txtDebug.setText("Using GPS");
         }else if (settings.getBoolean(Constants.PREF_LOCATION_NETWORK,false)) {
@@ -35,6 +37,7 @@ public class GPSActivity extends ActionBarActivity implements LocationListener {
         }else{
             System.out.println("No provider is enabled");
             txtDebug.setText("No location provider is enabled");
+            btnOpen.setEnabled(false);
         }
 
 
@@ -81,6 +84,9 @@ public class GPSActivity extends ActionBarActivity implements LocationListener {
 
         txtLoc.setText("Provider enabled");
         System.out.println("Provider enabled");
+
+        btnOpen.setEnabled(true);
+
     }
 
     @Override
@@ -88,6 +94,7 @@ public class GPSActivity extends ActionBarActivity implements LocationListener {
         TextView txtLoc = (TextView) findViewById(R.id.txtGPS);
     txtLoc.setText("Provider disabled");
     System.out.println("Provider disabled");
+        btnOpen.setEnabled(false);
     }
 
     public void openMap(View v) {
