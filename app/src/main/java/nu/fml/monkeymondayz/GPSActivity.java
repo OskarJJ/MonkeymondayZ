@@ -37,7 +37,7 @@ public class GPSActivity extends ActionBarActivity implements LocationListener {
         }else{
             System.out.println("No provider is enabled");
             txtDebug.setText("No location provider is enabled");
-            btnOpen.setEnabled(false);
+            //btnOpen.setEnabled(false);
         }
 
 
@@ -85,16 +85,16 @@ public class GPSActivity extends ActionBarActivity implements LocationListener {
         txtLoc.setText("Provider enabled");
         System.out.println("Provider enabled");
 
-        btnOpen.setEnabled(true);
+        //btnOpen.setEnabled(true);
 
     }
 
     @Override
     public void onProviderDisabled(String provider) {
         TextView txtLoc = (TextView) findViewById(R.id.txtGPS);
-    txtLoc.setText("Provider disabled");
-    System.out.println("Provider disabled");
-        btnOpen.setEnabled(false);
+        txtLoc.setText("Provider disabled");
+        System.out.println("Provider disabled");
+        //btnOpen.setEnabled(false);
     }
 
     public void openMap(View v) {

@@ -1,9 +1,12 @@
 package nu.fml.monkeymondayz;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.hardware.SensorManager;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
@@ -24,6 +27,7 @@ public class MainActivity extends Activity {
 
         new AsyncTask<Void,Void,Void>() {
             protected Void doInBackground(Void... params) {
+
                 PackageManager p = getPackageManager();
                 boolean hasAccelerometer = p.hasSystemFeature(PackageManager.FEATURE_SENSOR_ACCELEROMETER);
                 boolean hasGyroscope = p.hasSystemFeature(PackageManager.FEATURE_SENSOR_GYROSCOPE);
@@ -43,13 +47,13 @@ public class MainActivity extends Activity {
                 editor.putBoolean(Constants.PREF_LOCATION_NETWORK, hasNetworkLocation);
 
                 editor.commit();
-                System.out.println(hasAccelerometer + "," + hasGyroscope + "," + hasLight + "," + hasMicrophone + "," + hasGPSLocation + "," + hasNetworkLocation);
-
+            /*
                 try {
                     Thread.sleep(4000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                */
                 return null;
             }
 
