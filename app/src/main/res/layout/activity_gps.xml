@@ -33,4 +33,13 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Terrain"
+        android:id="@+id/txtTerrain"
+        android:layout_above="@+id/txtGPS"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="53dp" />
+
 </RelativeLayout>
