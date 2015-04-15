@@ -63,12 +63,8 @@
             android:value="AIzaSyBMvgl22fzVnpAT1WU-I6IPgQGwnAgJ4NI" />
 
         <activity
-            android:name=".NotificationActivity"
-            android:label="@string/title_activity_notification"
-            android:parentActivityName=".MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="nu.fml.monkeymondayz.MainActivity" />
+            android:name=".CaughtActivity"
+            android:label="@string/title_activity_caught" >
         </activity>
     </application>
 

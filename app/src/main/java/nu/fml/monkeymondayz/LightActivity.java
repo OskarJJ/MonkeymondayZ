@@ -53,6 +53,7 @@ public class LightActivity extends Activity implements SensorEventListener {
         if(caught == true){
         Intent intent = new Intent(this, CaughtActivity.class);
             startActivity(intent);
+            
         }
     }
     private Runnable isCaught = new Runnable()
