@@ -52,7 +52,7 @@ public class NotificationActivity extends Activity {
         // Actions are just fake
         Notification noti = new Notification.Builder(this)
                 .setContentTitle("A wild Monkeymon appeared" + "!")
-                .setContentText("NAMNTYP").setSmallIcon(R.mipmap.ic_launcher)
+                .setContentText("Henrik").setSmallIcon(R.mipmap.ic_launcher)
                 .setContentIntent(pIntent)
                 .addAction(R.drawable.common_signin_btn_icon_pressed_dark, "Fight", pIntent)
                 .addAction(R.drawable.common_signin_btn_icon_pressed_dark, "Run", pIntent).build();
