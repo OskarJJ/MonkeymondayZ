@@ -1,40 +1,31 @@
 package nu.fml.monkeymondayz;
 
 import android.app.Activity;
-import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.TextView;
-
-import android.app.Activity;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
+import android.os.Handler;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-
 
 
 public class LightActivity extends Activity implements SensorEventListener {
 
     private SensorManager sensorManager;
     private Sensor sensor;
+    private boolean caught;
+    private Handler myHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_light);
-
+        caught = false;
+        myHandler = new Handler();
         sensorManager = (SensorManager) this.getSystemService(SENSOR_SERVICE);
 
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
@@ -53,7 +44,25 @@ public class LightActivity extends Activity implements SensorEventListener {
         float proximity = event.values[0];
         TextView textView = (TextView) findViewById(R.id.textView);
         textView.setText("Proximity is " + proximity + " cm");
+        for(int i = 0; i<10;i++){
+            if (proximity < 2) {
+                myHandler.postDelayed(isCaught, 1000);
+            }
+
+        }
+        if(caught == true){
+        Intent intent = new Intent(this, CaughtActivity.class);
+            startActivity(intent);
+        }
     }
+    private Runnable isCaught = new Runnable()
+    {
+        @Override
+        public void run()
+        {
+            caught = true;
+        }
+    };
 
     @Override
     public final void onAccuracyChanged(Sensor sensor, int accuracy) {
