@@ -87,9 +87,14 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(this, LightActivity.class);
         startActivity(intent);
     }
+    public void goNotification(View view) {
+        Intent intent = new Intent(this, NotificationActivity.class);
+        startActivity(intent);
+    }
 
 
-    @Override
+
+        @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long

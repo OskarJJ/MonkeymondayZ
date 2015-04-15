@@ -81,11 +81,9 @@ public class LightActivity extends Activity implements SensorEventListener {
         mSensorManager.registerListener(this, mLightSensor,
                 SensorManager.SENSOR_DELAY_FASTEST);
     }
-
     @Override
     protected void onPause() {
         mSensorManager.unregisterListener(this);
         super.onPause();
     }
-
 }
