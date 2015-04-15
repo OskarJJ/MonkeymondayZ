@@ -7,5 +7,4 @@
     <string name="title_activity_accel">ACCELActivity</string>
     <string name="title_activity_gps_map">GpsMapActivity</string>
     <string name="title_activity_light">LightActivity</string>
-    <string name="title_activity_caught">CaughtActivity</string>
 </resources>

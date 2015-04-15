@@ -113,9 +113,16 @@ public class LightActivity extends Activity implements SensorEventListener {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+
+
+
+
+
+
 }
-//
-//
+
 //
 //    @Override
 //    public void onSensorChanged(SensorEvent event) {

@@ -8,6 +8,12 @@
         android:minSdkVersion="17"
         android:targetSdkVersion="21" />
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -22,6 +28,45 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="nu.fml.monkeymondayz.GPSActivity"
+            android:label="@string/title_activity_gps"
+            android:parentActivityName="nu.fml.monkeymondayz.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="nu.fml.monkeymondayz.MainActivity" />
+        </activity>
+        <activity
+            android:name="nu.fml.monkeymondayz.ACCELActivity"
+            android:label="@string/title_activity_accel"
+            android:parentActivityName="nu.fml.monkeymondayz.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="nu.fml.monkeymondayz.MainActivity" />
+        </activity>
+        <activity
+            android:name="nu.fml.monkeymondayz.GpsMapActivity"
+            android:label="GpsMapActivity"
+            android:parentActivityName="nu.fml.monkeymondayz.GPSActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="nu.fml.monkeymondayz.GPSActivity" />
+        </activity>
+        <activity
+            android:name="nu.fml.monkeymondayz.LightActivity"
+            android:label="LightActivity"
+            android:parentActivityName="nu.fml.monkeymondayz.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="nu.fml.monkeymondayz.MainActivity" />
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyBMvgl22fzVnpAT1WU-I6IPgQGwnAgJ4NI" />
     </application>
 
 </manifest>
