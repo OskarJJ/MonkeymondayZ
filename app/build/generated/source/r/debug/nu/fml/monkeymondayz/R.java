@@ -1726,7 +1726,7 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f0a0043;
         public static final int action_mode_bar_stub=0x7f0a0042;
         public static final int action_mode_close_button=0x7f0a0035;
-        public static final int action_settings=0x7f0a0065;
+        public static final int action_settings=0x7f0a0064;
         public static final int activity_chooser_view_content=0x7f0a0036;
         public static final int adjust_height=0x7f0a0017;
         public static final int adjust_width=0x7f0a0018;
@@ -1734,11 +1734,11 @@ containing a value of this type.
         public static final int beginning=0x7f0a0014;
         public static final int book_now=0x7f0a002c;
         public static final int btnOpenMap=0x7f0a0059;
-        public static final int button=0x7f0a0062;
-        public static final int button1=0x7f0a0063;
-        public static final int buttonaccel=0x7f0a0060;
-        public static final int buttongps=0x7f0a005f;
-        public static final int buttonlight=0x7f0a0061;
+        public static final int button=0x7f0a0061;
+        public static final int button1=0x7f0a0062;
+        public static final int buttonaccel=0x7f0a005f;
+        public static final int buttongps=0x7f0a005e;
+        public static final int buttonlight=0x7f0a0060;
         public static final int buyButton=0x7f0a0029;
         public static final int buy_now=0x7f0a002d;
         public static final int buy_with_google=0x7f0a002e;
@@ -1756,7 +1756,6 @@ containing a value of this type.
         public static final int expand_activities_button=0x7f0a0037;
         public static final int expanded_menu=0x7f0a003d;
         public static final int grayscale=0x7f0a0031;
-        public static final int hejhej=0x7f0a005c;
         public static final int holo_dark=0x7f0a0024;
         public static final int holo_light=0x7f0a0025;
         public static final int home=0x7f0a0004;
@@ -1765,10 +1764,10 @@ containing a value of this type.
         public static final int icon=0x7f0a003b;
         public static final int ifRoom=0x7f0a001e;
         public static final int image=0x7f0a0038;
-        public static final int imageView=0x7f0a0064;
+        public static final int imageView=0x7f0a0063;
         public static final int listMode=0x7f0a0009;
         public static final int list_item=0x7f0a003a;
-        public static final int main123=0x7f0a005e;
+        public static final int main123=0x7f0a005d;
         public static final int map=0x7f0a005b;
         public static final int match_parent=0x7f0a002b;
         public static final int middle=0x7f0a0016;
@@ -1803,7 +1802,7 @@ containing a value of this type.
         public static final int submit_area=0x7f0a0051;
         public static final int tabMode=0x7f0a000b;
         public static final int terrain=0x7f0a001b;
-        public static final int text1=0x7f0a005d;
+        public static final int textView=0x7f0a005c;
         public static final int title=0x7f0a003c;
         public static final int txtDebug=0x7f0a0058;
         public static final int txtGPS=0x7f0a0057;

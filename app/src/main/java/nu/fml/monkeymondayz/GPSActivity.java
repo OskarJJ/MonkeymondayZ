@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -99,7 +100,16 @@ public class GPSActivity extends ActionBarActivity implements LocationListener {
                             try {
                                 //String fetchUrl = "http://maps.googleapis.com/maps/api/staticmap?center=55.7039512,13.1807435&zoom=20&size=1x1&maptype=terrain&sensor=false"; //White?
 //                                String fetchUrl = "http://maps.googleapis.com/maps/api/staticmap?center=15.326572,-76.157227&zoom=20&size=1000x1000&maptype=terrain&sensor=false"; //Blue?
-                                String fetchUrl = "http://maps.googleapis.com/maps/api/staticmap?center=" + lat + "," + lon + "&zoom=20&size=1000x1000&maptype=terrain&sensor=false"; //Blue?
+                                String fetchUrl = "http://maps.googleapis.com/maps/api/staticmap?center=" + lat + "," + lon + "&zoom=20&size=1x1&maptype=terrain&sensor=false"; //Blue?
+
+                                //#CADFAA //Green = Grass (-3481686)
+                                //#?        //Green = Forest (-2956088)
+                                //#FFFFFF //White = Road/Asphalt
+                                //#99C0FB //Blue = Water
+                                //#B2D0FE //Blue = Water (-4993025)
+                                //#E9E5DC //Grey, building
+                                //#E8DDBD //Brown, building(?)
+                                //-1446945 - Field
 
                                 //System.out.println("Setting URL!");
                                 URL u = new URL(fetchUrl);
@@ -113,6 +123,50 @@ public class GPSActivity extends ActionBarActivity implements LocationListener {
                                 pixelData = d.getPixel(0,0);
 
                                 message = "done... (" + pixelData + ")";
+
+                                String hexValue = Integer.toString(pixelData,16);
+                                System.out.println("Color hex=" + hexValue);
+
+                                int redV = Color.red(pixelData);
+                                int greenV = Color.green(pixelData);
+                                int blueV = Color.blue(pixelData);
+
+                                String sRGB = "R:" + redV + " G:" + greenV + " B:" + blueV;
+                                String extraData = "(" + pixelData + "/" + sRGB + ")";
+                                String terr = "none";
+
+                                int hValOne = Math.max(redV,greenV);
+                                int hValTwo = Math.max(hValOne,blueV);
+
+                                if (hValTwo==redV) {
+                                    pixelData = Color.RED;
+                                }else if (hValTwo==greenV) {
+                                    pixelData = Color.GREEN;
+                                }else if (hValTwo==blueV) {
+                                    pixelData = Color.BLUE;
+                                }else {
+                                    pixelData = Color.WHITE;
+                                }
+
+                                if (pixelData==Color.WHITE || pixelData==Color.BLACK) {
+                                    //Asphalt
+                                    terr = "asphalt";
+                                }
+
+                                if (pixelData==Color.RED) {
+                                    terr = "building";
+                                }
+
+                                if (pixelData==Color.BLUE) {
+                                    terr = "water";
+                                }
+
+                                if (pixelData==Color.GREEN) {
+                                    terr = "forest";
+
+                                }
+                                message = terr + ", " + extraData;
+                                //txtTerrain.setText("terrain: " + terr + ", " + extraData);
                             }catch(Exception e) {
                                // System.out.println("Inner async error");
                                // e.printStackTrace();
@@ -170,5 +224,23 @@ public class GPSActivity extends ActionBarActivity implements LocationListener {
     public void openMap(View v) {
         Intent intent = new Intent(this, GpsMapActivity.class);
         startActivity(intent);
+    }
+
+    private int identifyColor(int r,int g,int b) {
+        int hVal = Math.max(r,g);
+        int hValTwo = Math.max(hVal,b);
+
+        if (hValTwo==r) {
+            return Color.RED;
+        }
+
+        if (hValTwo==g) {
+            return Color.GREEN;
+        }
+
+        if (hValTwo==b) {
+            return Color.BLUE;
+        }
+        return Color.BLACK;
     }
 }
