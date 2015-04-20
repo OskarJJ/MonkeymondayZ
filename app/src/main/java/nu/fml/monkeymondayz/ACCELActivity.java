@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.content.Intent;
+
 
 
 public class ACCELActivity extends Activity implements SensorEventListener{
@@ -103,7 +105,12 @@ public class ACCELActivity extends Activity implements SensorEventListener{
             }
 
         }
+        if(last_x>10||last_y>10||last_z>10){
+            Intent intent = new Intent(this, LightActivity.class);
+            startActivity(intent);
     }
+    }
+
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
