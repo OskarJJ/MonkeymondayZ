@@ -47,6 +47,8 @@ public class LightActivity extends Activity implements SensorEventListener {
         for(int i = 0; i<10;i++){
             if (proximity < 2) {
                 myHandler.postDelayed(isCaught, 1000);
+            } else {
+                caught = false;
             }
 
         }

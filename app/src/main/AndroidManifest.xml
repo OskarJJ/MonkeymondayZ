@@ -64,7 +64,7 @@
 
         <activity
             android:name=".CaughtActivity"
-            android:label="@string/title_activity_caught" >
+            android:label="CaughtActivity" >
         </activity>
     </application>
 
