@@ -31,10 +31,13 @@ import java.io.InputStream;
 import java.net.HttpRetryException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class GPSActivity extends ActionBarActivity implements LocationListener {
     private Button btnOpen;
+    private Timer checkTimer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,17 +49,24 @@ public class GPSActivity extends ActionBarActivity implements LocationListener {
         SharedPreferences settings = getSharedPreferences(Constants.AVAILABLE_SENSORS,0);
         btnOpen = (Button) findViewById(R.id.btnOpenMap);
         btnOpen.setEnabled(true);
-        if (settings.getBoolean(Constants.PREF_LOCATION_GPS, false)) {
+        /*if (settings.getBoolean(Constants.PREF_LOCATION_GPS, false)) {
             lMgr.requestLocationUpdates(LocationManager.GPS_PROVIDER,10,1,this);
             txtDebug.setText("Using GPS");
-        }else if (settings.getBoolean(Constants.PREF_LOCATION_NETWORK,false)) {
+        }else*/
+        if (settings.getBoolean(Constants.PREF_LOCATION_NETWORK,false)) {
             lMgr.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,10,1,this);
             txtDebug.setText("Using network provider");
         }else{
             System.out.println("No provider is enabled");
             txtDebug.setText("No location provider is enabled");
-            //btnOpen.setEnabled(false);
         }
+
+        this.checkTimer = new Timer();
+        this.checkTimer.schedule(new TimerTask() {
+            public void run() {
+                checkTerrain();
+            }
+        },0,5000);
     }
 
 
@@ -83,8 +93,8 @@ public class GPSActivity extends ActionBarActivity implements LocationListener {
     }
 
     private Location currentLocation;
+    private String currentVegetation;
 
-    @Override
     public void onLocationChanged(Location location) {
         final TextView txtTerrain = (TextView) findViewById(R.id.txtTerrain);
         final double lat = location.getLatitude();
@@ -94,46 +104,24 @@ public class GPSActivity extends ActionBarActivity implements LocationListener {
                 final Handler handler = new Handler();
                 try {
                     new AsyncTask<Void,Void,Void>() {
-                        private String message;
+                        private String message,terr;
                         private int pixelData;
                         protected Void doInBackground(Void... params) {
                             try {
-                                //String fetchUrl = "http://maps.googleapis.com/maps/api/staticmap?center=55.7039512,13.1807435&zoom=20&size=1x1&maptype=terrain&sensor=false"; //White?
-//                                String fetchUrl = "http://maps.googleapis.com/maps/api/staticmap?center=15.326572,-76.157227&zoom=20&size=1000x1000&maptype=terrain&sensor=false"; //Blue?
                                 String fetchUrl = "http://maps.googleapis.com/maps/api/staticmap?center=" + lat + "," + lon + "&zoom=20&size=1x1&maptype=terrain&sensor=false"; //Blue?
-
-                                //#CADFAA //Green = Grass (-3481686)
-                                //#?        //Green = Forest (-2956088)
-                                //#FFFFFF //White = Road/Asphalt
-                                //#99C0FB //Blue = Water
-                                //#B2D0FE //Blue = Water (-4993025)
-                                //#E9E5DC //Grey, building
-                                //#E8DDBD //Brown, building(?)
-                                //-1446945 - Field
-
-                                //System.out.println("Setting URL!");
                                 URL u = new URL(fetchUrl);
-                                //System.out.println("Done");
-                                //System.out.println("Opening stream");
                                 InputStream is = u.openStream();
-                                //System.out.println("Done!");
-                                //System.out.println("Decoding bitmapstream");
                                 Bitmap d = BitmapFactory.decodeStream(is);
-                                //System.out.println("Done!");
                                 pixelData = d.getPixel(0,0);
-
                                 message = "done... (" + pixelData + ")";
-
                                 String hexValue = Integer.toString(pixelData,16);
-                                System.out.println("Color hex=" + hexValue);
-
                                 int redV = Color.red(pixelData);
                                 int greenV = Color.green(pixelData);
                                 int blueV = Color.blue(pixelData);
 
                                 String sRGB = "R:" + redV + " G:" + greenV + " B:" + blueV;
                                 String extraData = "(" + pixelData + "/" + sRGB + ")";
-                                String terr = "none";
+                                terr = "none";
 
                                 int hValOne = Math.max(redV,greenV);
                                 int hValTwo = Math.max(hValOne,blueV);
@@ -179,6 +167,7 @@ public class GPSActivity extends ActionBarActivity implements LocationListener {
                                 public void run() {
                                     txtTerrain.setText("Fetched terrain: " + message);
                                     txtTerrain.setBackgroundColor(pixelData);
+                                    currentVegetation = terr;
                                 }
                             });
                         }
@@ -201,6 +190,18 @@ public class GPSActivity extends ActionBarActivity implements LocationListener {
     public void onStatusChanged(String provider, int status, Bundle extras) {
        // System.out.println("onStatusChanged()");
     }
+
+    private void checkTerrain() {
+        if (currentVegetation!=null) {
+            if (currentVegetation.compareTo("none")!=0) {
+                System.out.println("Current vegetation: " + currentVegetation);
+                this.checkTimer.cancel();
+            }
+        }else{
+            System.out.println("Current vegetation is null");
+        }
+    }
+
 
     @Override
     public void onProviderEnabled(String provider) {

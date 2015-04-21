@@ -74,6 +74,11 @@
             android:name=".CaughtActivity"
             android:label="CaughtActivity" >
         </activity>
+
+        <service
+            android:name=".FindMonkeyService"
+            android:exported="false" >
+        </service>
     </application>
 
 </manifest>
