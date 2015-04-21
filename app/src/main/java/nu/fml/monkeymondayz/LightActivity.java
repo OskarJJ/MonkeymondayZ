@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 
+
 public class LightActivity extends Activity implements SensorEventListener {
 
     private SensorManager sensorManager;
