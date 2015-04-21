@@ -7,6 +7,7 @@ import android.view.MenuItem;
 
 
 public class FightActivity extends ActionBarActivity {
+    Data d = new Data();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
