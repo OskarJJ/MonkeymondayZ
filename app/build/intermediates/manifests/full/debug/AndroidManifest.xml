@@ -67,6 +67,11 @@
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyBMvgl22fzVnpAT1WU-I6IPgQGwnAgJ4NI" />
+
+        <activity
+            android:name="nu.fml.monkeymondayz.CaughtActivity"
+            android:label="CaughtActivity" >
+        </activity>
     </application>
 
 </manifest>

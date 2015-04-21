@@ -35,5 +35,14 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="69dp"
         android:onClick="goLight"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Notif"
+        android:id="@+id/button"
+        android:layout_below="@+id/buttonlight"
+        android:layout_centerHorizontal="true"
+        android:onClick="goNotification"/>
 </RelativeLayout>
-<!-- From: file:/C:/Users/Oskar/AndroidStudioProjects/MonkeymondayZ/app/src/main/res/layout/activity_main.xml -->
+<!-- From: file:/Users/Gardshol/Desktop/MAMN01/MonkeymondayZ/app/src/main/res/layout/activity_main.xml -->
