@@ -6,20 +6,19 @@ import java.util.*;
  * Created by Oskar on 2015-04-21.
  */
 public class Data {
-    ArrayList<String> monkeymonList = new ArrayList<String>();
+    HashMap<String,String> monkeymonMap = new HashMap<String,String>();
 
 
     public Data() {
-        this.monkeymonList.add(0, "Asfaltsapa");
-        this.monkeymonList.add(1, "Grönapa");
-        this.monkeymonList.add(2, "Fiskapa");
+        this.monkeymonMap.put("asphalt", "Asfaltsapa");
+        this.monkeymonMap.put("forest", "Grönapa");
+        this.monkeymonMap.put("water", "Fiskapa");
     }
-    public String getApa(int i){
-       String apa;
-        if(i>2||0>i){
-        apa = "Retardapa";
+    public String getApa(String s) {
+        String apa = monkeymonMap.get(s);
+        if (apa==null) {
+            apa = "Retardapa";
         }
-        apa =this.monkeymonList.get(i);
         return apa;
     }
 

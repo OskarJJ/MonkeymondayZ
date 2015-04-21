@@ -67,7 +67,8 @@ public class MainActivity extends Activity {
             }
 
         }.execute();
-
+        Intent monkey = new Intent(this,MonkeyFinderService.class);
+        startService(monkey);
     }
 
 

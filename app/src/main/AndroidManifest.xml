@@ -84,7 +84,8 @@
         </activity>
 
         <service
-            android:name=".FindMonkeyService"
+            android:name=".MonkeyFinderService"
+            android:enabled="true"
             android:exported="false" >
         </service>
     </application>
