@@ -14,6 +14,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.Vibrator;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -70,9 +71,14 @@ public class MonkeyFinderService extends Service {
                         .setContentIntent(pIntent)
                         .setContentIntent(fightIntent)
                         .addAction(R.drawable.common_signin_btn_icon_light, "Fight", fightIntent)
-                        .addAction(R.drawable.common_signin_btn_icon_pressed_dark, "Run",pIntent).build();
+                        .addAction(R.drawable.common_signin_btn_icon_pressed_dark, "Run", pIntent).build();
                 NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
                 noti.flags |= Notification.FLAG_AUTO_CANCEL;
+
+                Vibrator s = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                if (s.hasVibrator()) {
+                    s.vibrate(4000);
+                }
 
                 notificationManager.notify(0, noti);
             }
