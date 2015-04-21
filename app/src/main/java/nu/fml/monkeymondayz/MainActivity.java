@@ -22,6 +22,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        Intent notificationIntent = new Intent(this, NotificationActivity.class);
 
         final Handler handler = new Handler();
 
@@ -66,6 +67,8 @@ public class MainActivity extends Activity {
             }
 
         }.execute();
+        Intent monkey = new Intent(this,MonkeyFinderService.class);
+        startService(monkey);
     }
 
 

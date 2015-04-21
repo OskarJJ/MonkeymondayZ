@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
         android:allowBackup="true"
@@ -54,6 +55,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="nu.fml.monkeymondayz.MainActivity" />
         </activity>
+        <activity
+            android:name=".NotificationActivity"
+            android:label="NotificationActivity"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="nu.fml.monkeymondayz.MainActivity" />
+        </activity>
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -66,6 +75,20 @@
             android:name=".CaughtActivity"
             android:label="CaughtActivity" >
         </activity>
+        <activity
+            android:name=".FightActivity"
+            android:label="@string/title_activity_fight"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="nu.fml.monkeymondayz.MainActivity" />
+        </activity>
+
+        <service
+            android:name=".MonkeyFinderService"
+            android:enabled="true"
+            android:exported="false" >
+        </service>
     </application>
 
 </manifest>

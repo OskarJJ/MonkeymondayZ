@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 
@@ -48,6 +49,8 @@ public class LightActivity extends Activity implements SensorEventListener {
         for(int i = 0; i<10;i++){
             if (proximity < 2) {
                 myHandler.postDelayed(isCaught, 1000);
+            } else {
+                caught = false;
             }
 
         }
@@ -57,6 +60,8 @@ public class LightActivity extends Activity implements SensorEventListener {
             
         }
     }
+
+
     private Runnable isCaught = new Runnable()
     {
         @Override

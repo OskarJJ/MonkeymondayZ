@@ -45,8 +45,11 @@ public class NotificationActivity extends Activity {
     public void createNotification(View view) {
         // Prepare intent which is triggered if the
         // notification is selected
-        Intent intent = new Intent(this, NotificationActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+        Intent fIntent = new Intent(this, FightActivity.class);
+        PendingIntent fightIntent = PendingIntent.getActivity(this, 0, fIntent, 0);
 
         // Build notification
         // Actions are just fake
@@ -54,8 +57,9 @@ public class NotificationActivity extends Activity {
                 .setContentTitle("A wild Monkeymon appeared" + "!")
                 .setContentText("Henrik").setSmallIcon(R.mipmap.ic_launcher)
                 .setContentIntent(pIntent)
-                .addAction(R.drawable.common_signin_btn_icon_pressed_dark, "Fight", pIntent)
-                .addAction(R.drawable.common_signin_btn_icon_pressed_dark, "Run", pIntent).build();
+                .setContentIntent(fightIntent)
+                .addAction(R.drawable.common_signin_btn_icon_light, "Fight", fightIntent)
+                .addAction(R.drawable.common_signin_btn_icon_pressed_dark, "Run",pIntent).build();
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         // hide the notification after its selected
         noti.flags |= Notification.FLAG_AUTO_CANCEL;
