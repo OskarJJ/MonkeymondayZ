@@ -54,6 +54,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="nu.fml.monkeymondayz.MainActivity" />
         </activity>
+        <activity
+            android:name=".NotificationActivity"
+            android:label="NotificationActivity"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="nu.fml.monkeymondayz.MainActivity" />
+        </activity>
 
         <meta-data
             android:name="com.google.android.gms.version"
