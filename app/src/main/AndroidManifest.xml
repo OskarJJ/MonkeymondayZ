@@ -74,6 +74,14 @@
             android:name=".CaughtActivity"
             android:label="CaughtActivity" >
         </activity>
+        <activity
+            android:name=".FightActivity"
+            android:label="@string/title_activity_fight"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="nu.fml.monkeymondayz.MainActivity" />
+        </activity>
 
         <service
             android:name=".FindMonkeyService"
