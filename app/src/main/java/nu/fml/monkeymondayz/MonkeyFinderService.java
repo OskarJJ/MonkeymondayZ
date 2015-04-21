@@ -71,7 +71,9 @@ public class MonkeyFinderService extends Service {
                         .setContentIntent(pIntent)
                         .setContentIntent(fightIntent)
                         .addAction(R.drawable.common_signin_btn_icon_light, "Fight", fightIntent)
-                        .addAction(R.drawable.common_signin_btn_icon_pressed_dark, "Run", pIntent).build();
+                        .addAction(R.drawable.common_signin_btn_icon_pressed_dark, "Run", pIntent)
+                       // .setSound(,);
+                        .build();
                 NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
                 noti.flags |= Notification.FLAG_AUTO_CANCEL;
 
@@ -79,6 +81,7 @@ public class MonkeyFinderService extends Service {
                 if (s.hasVibrator()) {
                     s.vibrate(4000);
                 }
+
 
                 notificationManager.notify(0, noti);
             }
