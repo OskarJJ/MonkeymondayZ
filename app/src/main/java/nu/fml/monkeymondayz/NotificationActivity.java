@@ -45,7 +45,7 @@ public class NotificationActivity extends Activity {
     public void createNotification(View view) {
         // Prepare intent which is triggered if the
         // notification is selected
-        Intent intent = new Intent(this, NotificationActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
         // Build notification

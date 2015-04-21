@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 
@@ -54,10 +55,17 @@ public class LightActivity extends Activity implements SensorEventListener {
         }
         if(caught == true){
         Intent intent = new Intent(this, CaughtActivity.class);
+            Notify();
             startActivity(intent);
             
         }
     }
+
+    private void Notify() {
+        NotificationActivity  noti= new NotificationActivity();
+        noti.createNotification(null);
+    }
+
     private Runnable isCaught = new Runnable()
     {
         @Override
