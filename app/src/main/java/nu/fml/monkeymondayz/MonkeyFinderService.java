@@ -60,8 +60,8 @@ public class MonkeyFinderService extends Service {
 
                 Data d = new Data();
 
-                Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-                Uri lol2 = Uri.parse("android.resource://" + getPackageName() + "/" + R.drawable.alert);
+                //Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                Uri alarmSound = Uri.parse("android.resource://" + getPackageName() + "/" + R.drawable.alert);
 
                 Intent intent = new Intent(this, MainActivity.class);
                 PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
@@ -80,7 +80,7 @@ public class MonkeyFinderService extends Service {
                         .build();
                 NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
                 noti.flags |= Notification.FLAG_AUTO_CANCEL;
-                noti.sound = lol2;
+                noti.sound = alarmSound;
 
                 Vibrator s = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 if (s.hasVibrator()) {
