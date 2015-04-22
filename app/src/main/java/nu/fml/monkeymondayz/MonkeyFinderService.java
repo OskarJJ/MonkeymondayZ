@@ -75,8 +75,8 @@ public class MonkeyFinderService extends Service {
                         .setContentText(d.getApa(t)).setSmallIcon(R.mipmap.ic_launcher)
                         .setContentIntent(pIntent)
                         .setContentIntent(fightIntent)
-                        .addAction(R.drawable.common_signin_btn_icon_light, "Fight", fightIntent)
-                        .addAction(R.drawable.common_signin_btn_icon_pressed_dark, "Run", pIntent)
+                        .addAction(R.drawable.fight1, "Fight", fightIntent)
+                        .addAction(R.drawable.run, "Run", pIntent)
                         .build();
                 NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
                 noti.flags |= Notification.FLAG_AUTO_CANCEL;
