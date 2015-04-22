@@ -36,7 +36,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_splash);
         Intent notificationIntent = new Intent(this, NotificationActivity.class);
         final Handler handler = new Handler();
-        mySound = MediaPlayer.create(this, R.raw.monkeystart);
+        mySound = MediaPlayer.create(this, R.raw.apa);
 
         new AsyncTask<Void,Void,Void>() {
             protected Void doInBackground(Void... params) {
