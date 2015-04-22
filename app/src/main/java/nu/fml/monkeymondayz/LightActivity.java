@@ -6,6 +6,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,6 +14,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.Date;
+import java.util.Timer;
 
 
 public class LightActivity extends Activity implements SensorEventListener {
@@ -21,6 +24,7 @@ public class LightActivity extends Activity implements SensorEventListener {
     private Sensor sensor;
     private boolean caught;
     private Handler myHandler;
+    private long tid1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +33,13 @@ public class LightActivity extends Activity implements SensorEventListener {
         caught = false;
         myHandler = new Handler();
         sensorManager = (SensorManager) this.getSystemService(SENSOR_SERVICE);
-
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+        tid1 = new Date().getTime();
+        new Thread(new Runnable() {
+            public void run(){
+            System.out.println("Thread");
+            }
+        }).start();
     }
 
     @Override
@@ -46,31 +55,31 @@ public class LightActivity extends Activity implements SensorEventListener {
         float proximity = event.values[0];
         TextView textView = (TextView) findViewById(R.id.textView);
         textView.setText("Proximity is " + proximity + " cm");
-        for(int i = 0; i<10;i++){
+        if (new Date().getTime() - tid1 < 10000) {
             if (proximity < 2) {
                 myHandler.postDelayed(isCaught, 1000);
             } else {
                 caught = false;
             }
 
-        }
-        if(caught == true){
-        Intent intent = new Intent(this, CaughtActivity.class);
-            startActivity(intent);
-            
+        } else {
+            if (caught) {
+                Intent intent = new Intent(this, CaughtActivity.class);
+                startActivity(intent);
+
+            } else {
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+            }
         }
     }
 
-
-    private Runnable isCaught = new Runnable()
-    {
+    public Runnable isCaught = new Runnable() {
         @Override
-        public void run()
-        {
+        public void run() {
             caught = true;
         }
     };
-
     @Override
     public final void onAccuracyChanged(Sensor sensor, int accuracy) {
         // to do something
