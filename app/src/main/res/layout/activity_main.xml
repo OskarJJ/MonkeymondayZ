@@ -47,8 +47,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/expandableListView"
-        android:layout_alignStart="@+id/dexView"
-        android:layout_above="@+id/buttonlight"
+        android:layout_above="@+id/buttongps"
+        android:layout_centerHorizontal="true"
         android:layout_below="@+id/dexView" />
 
 </RelativeLayout>
