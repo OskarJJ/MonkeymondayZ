@@ -1706,15 +1706,18 @@ containing a value of this type.
         public static final int common_signin_btn_text_normal_light=0x7f02004f;
         public static final int common_signin_btn_text_pressed_dark=0x7f020050;
         public static final int common_signin_btn_text_pressed_light=0x7f020051;
-        public static final int fight=0x7f020052;
-        public static final int fight_01=0x7f020053;
-        public static final int fight_2=0x7f020054;
-        public static final int ic_plusone_medium_off_client=0x7f020055;
-        public static final int ic_plusone_small_off_client=0x7f020056;
-        public static final int ic_plusone_standard_off_client=0x7f020057;
-        public static final int ic_plusone_tall_off_client=0x7f020058;
-        public static final int powered_by_google_dark=0x7f020059;
-        public static final int powered_by_google_light=0x7f02005a;
+        public static final int fig=0x7f020052;
+        public static final int fight=0x7f020053;
+        public static final int fight1=0x7f020054;
+        public static final int fight_01=0x7f020055;
+        public static final int fight_2=0x7f020056;
+        public static final int ic_plusone_medium_off_client=0x7f020057;
+        public static final int ic_plusone_small_off_client=0x7f020058;
+        public static final int ic_plusone_standard_off_client=0x7f020059;
+        public static final int ic_plusone_tall_off_client=0x7f02005a;
+        public static final int powered_by_google_dark=0x7f02005b;
+        public static final int powered_by_google_light=0x7f02005c;
+        public static final int run=0x7f02005d;
     }
     public static final class id {
         public static final int a123123=0x7f0a0057;
