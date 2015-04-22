@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.SensorManager;
 import android.location.LocationManager;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
@@ -27,7 +28,7 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
     ListView listView ;
-
+    MediaPlayer mySound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_splash);
         Intent notificationIntent = new Intent(this, NotificationActivity.class);
         final Handler handler = new Handler();
+        mySound = MediaPlayer.create(this, R.raw.monkeystart);
 
         new AsyncTask<Void,Void,Void>() {
             protected Void doInBackground(Void... params) {
@@ -100,6 +102,7 @@ public class MainActivity extends Activity {
     public void goACCEL(View view) {
         Intent intent = new Intent(this, ACCELActivity.class);
         startActivity(intent);
+        mySound.start();
     }
     public void goLight(View view) {
         Intent intent = new Intent(this, LightActivity.class);
