@@ -28,7 +28,7 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
     ListView listView ;
-    MediaPlayer mySound;
+//    MediaPlayer mySound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +36,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_splash);
         Intent notificationIntent = new Intent(this, NotificationActivity.class);
         final Handler handler = new Handler();
-        mySound = MediaPlayer.create(this, R.raw.apa);
+//        mySound = MediaPlayer.create(this, R.raw.apa);
 
         new AsyncTask<Void,Void,Void>() {
             protected Void doInBackground(Void... params) {
@@ -102,7 +102,7 @@ public class MainActivity extends Activity {
     public void goACCEL(View view) {
         Intent intent = new Intent(this, ACCELActivity.class);
         startActivity(intent);
-        mySound.start();
+//        mySound.start();
     }
     public void goLight(View view) {
         Intent intent = new Intent(this, LightActivity.class);
