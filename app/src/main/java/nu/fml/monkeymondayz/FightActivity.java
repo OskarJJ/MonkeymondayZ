@@ -16,7 +16,7 @@ public class FightActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fight);
-        CancelNotification(this,1);
+        CancelNotification(this);
         setUpViews();
         update();
     }
@@ -51,7 +51,7 @@ public class FightActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
     //Stoppar notificationen, kan innebära problems
-    public static void CancelNotification(Context ctx, int notifyId) {
+    public static void CancelNotification(Context ctx) {
         NotificationManager notifManager= (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
         notifManager.cancelAll();
     }

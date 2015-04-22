@@ -105,7 +105,7 @@ public class ACCELActivity extends Activity implements SensorEventListener{
             }
 
         }
-        if(last_x>10||last_y>10||last_z>10){
+        if(last_x>17||last_y>15||last_z>30){
             Intent intent = new Intent(this, LightActivity.class);
             startActivity(intent);
     }
