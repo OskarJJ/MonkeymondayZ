@@ -1,18 +1,31 @@
 package nu.fml.monkeymondayz;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 
 public class FightActivity extends ActionBarActivity {
-
+    Data d = new Data();
+    TextView myNameText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fight);
+        CancelNotification(this);
+        setUpViews();
+        update();
+    }
 
+    private void setUpViews() {
+        myNameText = (TextView)findViewById(R.id.myNameTextView);
+    }
+    private void update() {
+        myNameText.setText(d.getApaName());
     }
 
 
@@ -36,5 +49,10 @@ public class FightActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    //Stoppar notificationen, kan innebära problems
+    public static void CancelNotification(Context ctx) {
+        NotificationManager notifManager= (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
+        notifManager.cancelAll();
     }
 }

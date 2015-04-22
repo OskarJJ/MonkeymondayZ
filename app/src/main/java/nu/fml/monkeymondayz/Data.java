@@ -7,7 +7,8 @@ import java.util.*;
  */
 public class Data {
     HashMap<String,String> monkeymonMap = new HashMap<String,String>();
-
+    int myLevel = 0;
+    String apaName;
 
     public Data() {
         this.monkeymonMap.put("asphalt", "Asfaltsapa");
@@ -19,7 +20,14 @@ public class Data {
         if (apa==null) {
             apa = "Retardapa";
         }
+        String apaName= apa;
         return apa;
     }
-
+    public String getApaName(){return apaName; }
+    public void updateMyLevel(int i) {
+        myLevel = myLevel+i;
+    }
+    public int getMyLevel(){
+        return myLevel;
+    }
 }

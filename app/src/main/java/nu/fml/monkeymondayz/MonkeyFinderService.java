@@ -12,6 +12,8 @@ import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Vibrator;
@@ -58,6 +60,9 @@ public class MonkeyFinderService extends Service {
 
                 Data d = new Data();
 
+                //Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                Uri alarmSound = Uri.parse("android.resource://" + getPackageName() + "/" + R.drawable.alert);
+
                 Intent intent = new Intent(this, MainActivity.class);
                 PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
@@ -70,15 +75,18 @@ public class MonkeyFinderService extends Service {
                         .setContentText(d.getApa(t)).setSmallIcon(R.mipmap.ic_launcher)
                         .setContentIntent(pIntent)
                         .setContentIntent(fightIntent)
-                        .addAction(R.drawable.common_signin_btn_icon_light, "Fight", fightIntent)
-                        .addAction(R.drawable.common_signin_btn_icon_pressed_dark, "Run", pIntent).build();
+                        .addAction(R.drawable.fig, "Fight", fightIntent)
+                        .addAction(R.drawable.run, "Run", pIntent)
+                        .build();
                 NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
                 noti.flags |= Notification.FLAG_AUTO_CANCEL;
+                noti.sound = alarmSound;
 
                 Vibrator s = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 if (s.hasVibrator()) {
                     s.vibrate(4000);
                 }
+
 
                 notificationManager.notify(0, noti);
             }
