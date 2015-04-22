@@ -12,19 +12,27 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ExpandableListAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 
 
 public class MainActivity extends Activity {
+    ListView listView ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         Intent notificationIntent = new Intent(this, NotificationActivity.class);
-
         final Handler handler = new Handler();
 
         new AsyncTask<Void,Void,Void>() {
@@ -63,6 +71,7 @@ public class MainActivity extends Activity {
                 handler.post(new Runnable() {
                     public void run() {
                         setContentView(R.layout.activity_main);
+                        setupList();
                     }
                 });
             }
@@ -70,7 +79,9 @@ public class MainActivity extends Activity {
         }.execute();
         Intent monkey = new Intent(this,MonkeyFinderService.class);
         startService(monkey);
+
     }
+
 
 
     @Override
@@ -79,6 +90,8 @@ public class MainActivity extends Activity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
+
     public void goGPS(View view) {
         Intent intent = new Intent(this, GPSActivity.class);
         startActivity(intent);
@@ -91,13 +104,6 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(this, LightActivity.class);
         startActivity(intent);
     }
-    public void goNotification(View view) {
-        Intent intent = new Intent(this, NotificationActivity.class);
-        startActivity(intent);
-    }
-
-
-
         @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -112,15 +118,24 @@ public class MainActivity extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+
     //Stoppar notificationen, kan innebära problems
     public static void CancelNotification(Context ctx) {
         NotificationManager notifManager= (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
         notifManager.cancelAll();
     }
-
     @Override
     protected void onResume() {
         super.onResume();
         CancelNotification(this);
     }
+
+    //LISTVIEW
+    private void setupList() {
+    }
+
+
+
 }
