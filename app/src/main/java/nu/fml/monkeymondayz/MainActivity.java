@@ -1,6 +1,7 @@
 package nu.fml.monkeymondayz;
 
 import android.app.Activity;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -110,5 +111,16 @@ public class MainActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    //Stoppar notificationen, kan innebära problems
+    public static void CancelNotification(Context ctx) {
+        NotificationManager notifManager= (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
+        notifManager.cancelAll();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        CancelNotification(this);
     }
 }
