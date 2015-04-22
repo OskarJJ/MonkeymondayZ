@@ -265,6 +265,7 @@ available. Please contact the developer for assistance.</string>
     <!-- From: file:/Users/Gardshol/Desktop/MAMN01/MonkeymondayZ/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="title_activity_accel">ACCELActivity</string>
+    <string name="title_activity_fight">FightActivity</string>
     <string name="title_activity_gps">GPSActivity</string>
     <string name="title_activity_gps_map">GpsMapActivity</string>
     <string name="title_activity_light">LightActivity</string>
