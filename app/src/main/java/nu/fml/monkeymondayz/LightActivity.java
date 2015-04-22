@@ -18,13 +18,14 @@ import java.util.Date;
 import java.util.Timer;
 
 
-public class LightActivity extends Activity implements SensorEventListener {
+public class LightActivity extends Activity implements SensorEventListener, Runnable {
 
     private SensorManager sensorManager;
     private Sensor sensor;
     private boolean caught;
     private Handler myHandler;
     private long tid1;
+    private int secondsCaught;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +35,7 @@ public class LightActivity extends Activity implements SensorEventListener {
         myHandler = new Handler();
         sensorManager = (SensorManager) this.getSystemService(SENSOR_SERVICE);
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
-        tid1 = new Date().getTime();
-        new Thread(new Runnable() {
-            public void run(){
-            System.out.println("Thread");
-            }
-        }).start();
+        run();
     }
 
     @Override
@@ -55,31 +51,23 @@ public class LightActivity extends Activity implements SensorEventListener {
         float proximity = event.values[0];
         TextView textView = (TextView) findViewById(R.id.textView);
         textView.setText("Proximity is " + proximity + " cm");
-        if (new Date().getTime() - tid1 < 10000) {
             if (proximity < 2) {
-                myHandler.postDelayed(isCaught, 1000);
+                caught = true;
             } else {
                 caught = false;
             }
+        }
+
+    public final void result(){
+        if (secondsCaught>5) {
+            Intent intent = new Intent(this, CaughtActivity.class);
+            startActivity(intent);
 
         } else {
-            if (caught) {
-                Intent intent = new Intent(this, CaughtActivity.class);
-                startActivity(intent);
-
-            } else {
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-            }
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         }
     }
-
-    public Runnable isCaught = new Runnable() {
-        @Override
-        public void run() {
-            caught = true;
-        }
-    };
     @Override
     public final void onAccuracyChanged(Sensor sensor, int accuracy) {
         // to do something
@@ -92,22 +80,6 @@ public class LightActivity extends Activity implements SensorEventListener {
         sensorManager.unregisterListener(this);
     }
 
-    // other code
-//    private SensorManager mSensorManager;
-//    private Sensor mLightSensor;
-//    private float mLux = 0.0f;
-//    private TextView text1;
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_light);
-//
-//        mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-//        mLightSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
-//    }
-//
-//
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -130,46 +102,21 @@ public class LightActivity extends Activity implements SensorEventListener {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void run() {
+        new CountDownTimer(10000, 1000) {
 
+            public void onTick(long millisUntilFinished) {
+                if(caught){
+                    secondsCaught++;
+                }
+                System.out.println(secondsCaught);
 
+            }
 
-
-
-
-
+            public void onFinish() {
+                result();
+            }
+        }.start();
+    }
 }
-
-//
-//    @Override
-//    public void onSensorChanged(SensorEvent event) {
-//        if (event.sensor.getType() == Sensor.TYPE_LIGHT) {
-//            mLux = event.values[0];
-//            String luxStr = String.valueOf(mLux);
-//            TextView tv = (TextView) findViewById(R.id.text1);
-//            tv.setText(luxStr);
-//            Log.d("LUXTAG", "Lux value: " + event.values[0]);
-//
-//        }
-//    }
-//
-//
-//
-//
-//
-//
-//    @Override
-//    public void onAccuracyChanged(Sensor sensor, int accuracy) {
-//
-//    }
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        mSensorManager.registerListener(this, mLightSensor,
-//                SensorManager.SENSOR_DELAY_FASTEST);
-//    }
-//
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//        mSensorManager.unregisterListener(this);
-//    }
