@@ -13,6 +13,7 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,13 +22,16 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 
 
 public class MainActivity extends Activity {
-    ListView listView ;
+    // more efficient than HashMap for mapping integers to objects
+    SparseArray<Group> groups = new SparseArray<Group>();
+
 //    MediaPlayer mySound;
 
     @Override
@@ -38,7 +42,7 @@ public class MainActivity extends Activity {
         final Handler handler = new Handler();
 //        mySound = MediaPlayer.create(this, R.raw.apa);
 
-        new AsyncTask<Void,Void,Void>() {
+        new AsyncTask<Void, Void, Void>() {
             protected Void doInBackground(Void... params) {
 
                 PackageManager p = getPackageManager();
@@ -80,11 +84,10 @@ public class MainActivity extends Activity {
             }
 
         }.execute();
-        Intent monkey = new Intent(this,MonkeyFinderService.class);
+        Intent monkey = new Intent(this, MonkeyFinderService.class);
         startService(monkey);
 
     }
-
 
 
     @Override
@@ -99,16 +102,19 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(this, GPSActivity.class);
         startActivity(intent);
     }
+
     public void goACCEL(View view) {
         Intent intent = new Intent(this, ACCELActivity.class);
         startActivity(intent);
 //        mySound.start();
     }
+
     public void goLight(View view) {
         Intent intent = new Intent(this, LightActivity.class);
         startActivity(intent);
     }
-        @Override
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -124,12 +130,12 @@ public class MainActivity extends Activity {
     }
 
 
-
     //Stoppar notificationen, kan innebära problems
     public static void CancelNotification(Context ctx) {
-        NotificationManager notifManager= (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManager notifManager = (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
         notifManager.cancelAll();
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -138,8 +144,22 @@ public class MainActivity extends Activity {
 
     //LISTVIEW
     private void setupList() {
+        createData();
+        ExpandableListView listView = (ExpandableListView) findViewById(R.id.listView);
+        MyExpandableListAdapter adapter = new MyExpandableListAdapter(this,
+                groups);
+        listView.setAdapter(adapter);
     }
 
+    public void createData() {
+        for (int j = 0; j < 5; j++) {
+            Group group = new Group("Test " + j);
+            for (int i = 0; i < 5; i++) {
+                group.children.add("Sub Item" + i);
+            }
+            groups.append(j, group);
+        }
 
 
+    }
 }

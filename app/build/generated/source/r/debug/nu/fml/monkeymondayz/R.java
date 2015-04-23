@@ -1734,7 +1734,7 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f0a0043;
         public static final int action_mode_bar_stub=0x7f0a0042;
         public static final int action_mode_close_button=0x7f0a0035;
-        public static final int action_settings=0x7f0a0068;
+        public static final int action_settings=0x7f0a0069;
         public static final int activity_chooser_view_content=0x7f0a0036;
         public static final int adjust_height=0x7f0a0017;
         public static final int adjust_width=0x7f0a0018;
@@ -1762,7 +1762,6 @@ containing a value of this type.
         public static final int edit_query=0x7f0a0048;
         public static final int end=0x7f0a0015;
         public static final int expand_activities_button=0x7f0a0037;
-        public static final int expandableListView=0x7f0a0065;
         public static final int expanded_menu=0x7f0a003d;
         public static final int grayscale=0x7f0a0031;
         public static final int holo_dark=0x7f0a0024;
@@ -1776,6 +1775,7 @@ containing a value of this type.
         public static final int imageView=0x7f0a0067;
         public static final int imageView2=0x7f0a0058;
         public static final int listMode=0x7f0a0009;
+        public static final int listView=0x7f0a0065;
         public static final int list_item=0x7f0a003a;
         public static final int main123=0x7f0a0060;
         public static final int map=0x7f0a005e;
@@ -1814,6 +1814,7 @@ containing a value of this type.
         public static final int tabMode=0x7f0a000b;
         public static final int terrain=0x7f0a001b;
         public static final int textView=0x7f0a005f;
+        public static final int textView1=0x7f0a0068;
         public static final int title=0x7f0a003c;
         public static final int txtDebug=0x7f0a005b;
         public static final int txtGPS=0x7f0a005a;
@@ -1864,7 +1865,9 @@ containing a value of this type.
         public static final int activity_main=0x7f04001c;
         public static final int activity_notification=0x7f04001d;
         public static final int activity_splash=0x7f04001e;
-        public static final int support_simple_spinner_dropdown_item=0x7f04001f;
+        public static final int listrow_details=0x7f04001f;
+        public static final int listrow_group=0x7f040020;
+        public static final int support_simple_spinner_dropdown_item=0x7f040021;
     }
     public static final class menu {
         public static final int menu_accel=0x7f0e0000;

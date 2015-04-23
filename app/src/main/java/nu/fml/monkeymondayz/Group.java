@@ -1,0 +1,19 @@
+package nu.fml.monkeymondayz;
+
+/**
+ * Created by Oskar on 2015-04-23.
+ */
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Group {
+
+    public String string;
+    public final List<String> children = new ArrayList<String>();
+
+    public Group(String string) {
+        this.string = string;
+    }
+
+}
