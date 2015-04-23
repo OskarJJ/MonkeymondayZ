@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.apache.http.HttpHost;
@@ -43,16 +44,16 @@ public class GPSActivity extends ActionBarActivity implements LocationListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gps);
 
-        LocationManager lMgr = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        TextView txtDebug = (TextView) findViewById(R.id.txtDebug);
+        //LocationManager lMgr = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        //TextView txtDebug = (TextView) findViewById(R.id.txtDebug);
 
-        SharedPreferences settings = getSharedPreferences(Constants.AVAILABLE_SENSORS,0);
-        btnOpen = (Button) findViewById(R.id.btnOpenMap);
-        btnOpen.setEnabled(true);
+        //SharedPreferences settings = getSharedPreferences(Constants.AVAILABLE_SENSORS,0);
+        //btnOpen = (Button) findViewById(R.id.btnOpenMap);
+        //btnOpen.setEnabled(true);
         /*if (settings.getBoolean(Constants.PREF_LOCATION_GPS, false)) {
             lMgr.requestLocationUpdates(LocationManager.GPS_PROVIDER,10,1,this);
             txtDebug.setText("Using GPS");
-        }else*/
+        }else*//*
         if (settings.getBoolean(Constants.PREF_LOCATION_NETWORK,false)) {
             lMgr.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,10,1,this);
             txtDebug.setText("Using network provider");
@@ -67,6 +68,7 @@ public class GPSActivity extends ActionBarActivity implements LocationListener {
                 checkTerrain();
             }
         },0,5000);
+        */
     }
 
 
@@ -94,6 +96,7 @@ public class GPSActivity extends ActionBarActivity implements LocationListener {
     private String currentVegetation;
 
     public void onLocationChanged(Location location) {
+        /*
         final TextView txtTerrain = (TextView) findViewById(R.id.txtTerrain);
         final double lat = location.getLatitude();
         final double lon = location.getLongitude();
@@ -181,7 +184,7 @@ public class GPSActivity extends ActionBarActivity implements LocationListener {
         currentLocation = location;
         TextView txtLoc = (TextView) findViewById(R.id.txtGPS);
        // System.out.println("onLocationChanged()");
-        txtLoc.setText(location.toString());
+        txtLoc.setText(location.toString());*/
     }
 
     @Override
@@ -190,22 +193,22 @@ public class GPSActivity extends ActionBarActivity implements LocationListener {
     }
 
     private void checkTerrain() {
-        if (currentVegetation!=null) {
+       /* if (currentVegetation!=null) {
             if (currentVegetation.compareTo("none")!=0) {
                 System.out.println("Current vegetation: " + currentVegetation);
                 this.checkTimer.cancel();
             }
         }else{
             System.out.println("Current vegetation is null");
-        }
+        }*/
     }
 
 
     @Override
     public void onProviderEnabled(String provider) {
-        TextView txtLoc = (TextView) findViewById(R.id.txtGPS);
+        //TextView txtLoc = (TextView) findViewById(R.id.txtGPS);
 
-        txtLoc.setText("Provider enabled");
+        //txtLoc.setText("Provider enabled");
        // System.out.println("Provider enabled");
 
         //btnOpen.setEnabled(true);
@@ -214,19 +217,22 @@ public class GPSActivity extends ActionBarActivity implements LocationListener {
 
     @Override
     public void onProviderDisabled(String provider) {
-        TextView txtLoc = (TextView) findViewById(R.id.txtGPS);
-        txtLoc.setText("Provider disabled");
+        //TextView txtLoc = (TextView) findViewById(R.id.txtGPS);
+        //txtLoc.setText("Provider disabled");
         //System.out.println("Provider disabled");
         //btnOpen.setEnabled(false);
     }
 
     public void openMap(View v) {
-        Intent intent = new Intent(this, GpsMapActivity.class);
-        startActivity(intent);
+        //Intent intent = new Intent(this, GpsMapActivity.class);
+        //startActivity(intent);
+        ImageView imgV = (ImageView) findViewById(R.id.imgMonkey);
+        Monkey m = new Monkey(this);
+        imgV.setImageDrawable(m.getDrawable());
     }
 
     private int identifyColor(int r,int g,int b) {
-        int hVal = Math.max(r,g);
+        /*int hVal = Math.max(r,g);
         int hValTwo = Math.max(hVal,b);
 
         if (hValTwo==r) {
@@ -239,7 +245,8 @@ public class GPSActivity extends ActionBarActivity implements LocationListener {
 
         if (hValTwo==b) {
             return Color.BLUE;
-        }
+        }*/
         return Color.BLACK;
+
     }
 }
