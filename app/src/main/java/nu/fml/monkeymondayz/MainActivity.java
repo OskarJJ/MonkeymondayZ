@@ -170,15 +170,7 @@ public class MainActivity extends Activity {
 
         groupVatten.children.add("Empty");
         groups.append(2, groupVatten);
-
-        for (int j = 0; j < 5; j++) {
-            Group group = new Group("Test " + j);
-            for (int i = 0; i < 5; i++) {
-                group.children.add("Sub Item" + i);
-            }
-           // groups.append(j, group);
         }
 
 
     }
-}

@@ -50,8 +50,8 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         convertView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(activity, children,
-                        Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, children + ". The mouth that shapes at the center of its head is an indication of its emotions. The mouth wavers when " + children + " is enjoying itself. If the Monkemon becomes enraged, the mouth pouts fiercely!",
+                        Toast.LENGTH_LONG).show();
             }
         });
         return convertView;
