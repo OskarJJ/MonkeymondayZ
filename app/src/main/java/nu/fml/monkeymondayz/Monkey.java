@@ -37,15 +37,15 @@ public class Monkey {
         PorterDuff.Mode filter = PorterDuff.Mode.SRC_ATOP;
         switch (type) {
             case Monkey.MONKEY_ASPHALT:
-                color = Color.parseColor("#FFFF0000");
+                color = Color.parseColor("#44FF0000");
                 changeColor = true;
                 break;
             case Monkey.MONKEY_FOREST:
-                color = Color.parseColor("#FF00FF00");
+                color = Color.parseColor("#4400FF00");
                 changeColor = true;
                 break;
             case Monkey.MONKEY_WATER:
-                color = Color.parseColor("#FF0000FF");
+                color = Color.parseColor("#440000FF");
                 changeColor = true;
                 break;
             default:

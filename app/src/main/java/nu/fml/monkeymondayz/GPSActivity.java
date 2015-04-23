@@ -32,6 +32,7 @@ import java.io.InputStream;
 import java.net.HttpRetryException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -226,8 +227,20 @@ public class GPSActivity extends ActionBarActivity implements LocationListener {
     public void openMap(View v) {
         //Intent intent = new Intent(this, GpsMapActivity.class);
         //startActivity(intent);
+        Random rand = new Random();
+
+        String apa = Monkey.MONKEY_DEFAULT;
+        int rnd = rand.nextInt(3);
+        if (rnd==0) {
+            apa = Monkey.MONKEY_ASPHALT;
+        }else if (rnd==1) {
+            apa = Monkey.MONKEY_FOREST;
+        }else if (rnd==2) {
+            apa = Monkey.MONKEY_WATER;
+        }
+
         ImageView imgV = (ImageView) findViewById(R.id.imgMonkey);
-        Monkey m = new Monkey(this);
+        Monkey m = new Monkey(apa,this);
         imgV.setImageDrawable(m.getDrawable());
     }
 
