@@ -16,19 +16,29 @@ public class Monkey {
     public static final String MONKEY_WATER = "Fiskapa";
     public static final String MONKEY_DEFAULT = "Retardapa";
 
-
     private String type;
     private Drawable monkeyImage;
     private int maxHealth,currentHealth,level,attackDamage;
     private Context context;
-    public Monkey(String type,Context context) {
+    public Monkey(String type,Context context,int level) {
         this.type = type;
         this.context = context;
+        this.level = level;
+        this.attackDamage = 5+(2*this.level);
+        this.maxHealth = 10+(this.level);
+        this.currentHealth = maxHealth;
         initMonkey();
     }
     public Monkey(Context context) {
-        this(Monkey.MONKEY_DEFAULT,context);
+        this(Monkey.MONKEY_DEFAULT,context,1);
     }
+    public Monkey(Context context,int level) {
+        this(Monkey.MONKEY_DEFAULT,context,level);
+    }
+    public Monkey(String type,Context context) {
+        this(type,context,1);
+    }
+
     private void initMonkey() {
         Resources res = context.getResources();
         Drawable monkeyImg = res.getDrawable(R.drawable.apa);
@@ -56,6 +66,27 @@ public class Monkey {
             monkeyImg.setColorFilter(color,filter);
         }
         this.monkeyImage = monkeyImg;
+    }
+
+    public int doDamage(int dhp) {
+        this.currentHealth -= dhp;
+        return this.currentHealth;
+    }
+
+    public int getMaxHealth() {
+        return this.maxHealth;
+    }
+
+    public int getHealth() {
+        return this.currentHealth;
+    }
+
+    public int getLevel() {
+        return this.level;
+    }
+
+    public int getAttackDamage() {
+        return this.getAttackDamage();
     }
 
     public Drawable getDrawable() {
