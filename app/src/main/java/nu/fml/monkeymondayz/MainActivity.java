@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.hardware.SensorManager;
 import android.location.LocationManager;
 import android.media.MediaPlayer;
@@ -152,12 +154,29 @@ public class MainActivity extends Activity {
     }
 
     public void createData() {
+
+        Group groupAsfalt = new Group("Asfalt");
+        Group groupSkog = new Group("Skog");
+        Group groupVatten = new Group("Vatten");
+
+        groupAsfalt.children.add("Asfaltsapa");
+        groupAsfalt.children.add("apajävel");
+        groups.append(0, groupAsfalt);
+
+
+        groupSkog.children.add("Apatomas");
+        groups.append(1, groupSkog);
+
+
+        groupVatten.children.add("Empty");
+        groups.append(2, groupVatten);
+
         for (int j = 0; j < 5; j++) {
             Group group = new Group("Test " + j);
             for (int i = 0; i < 5; i++) {
                 group.children.add("Sub Item" + i);
             }
-            groups.append(j, group);
+           // groups.append(j, group);
         }
 
 
