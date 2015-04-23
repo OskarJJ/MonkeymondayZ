@@ -9,4 +9,4 @@
         android:id="@+id/imageView"
         android:layout_gravity="center_horizontal"
         android:src="@mipmap/apa" />
-</LinearLayout><!-- From: file:/Users/Gardshol/Desktop/MAMN01/MonkeymondayZ/app/src/main/res/layout/activity_splash.xml -->
+</LinearLayout><!-- From: file:/C:/Users/Oskar/AndroidStudioProjects/MonkeymondayZ2/app/src/main/res/layout/activity_splash.xml -->

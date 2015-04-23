@@ -3,4 +3,4 @@
     android:id="@+id/map"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:name="com.google.android.gms.maps.MapFragment"/><!-- From: file:/Users/Gardshol/Desktop/MAMN01/MonkeymondayZ/app/src/main/res/layout/activity_gps_map.xml -->
+    android:name="com.google.android.gms.maps.MapFragment"/><!-- From: file:/C:/Users/Oskar/AndroidStudioProjects/MonkeymondayZ2/app/src/main/res/layout/activity_gps_map.xml -->

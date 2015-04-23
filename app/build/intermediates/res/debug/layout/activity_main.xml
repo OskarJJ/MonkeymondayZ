@@ -5,51 +5,44 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
     android:id="@+id/main123"
-    android:background="#ffff7526">
+    android:background="#ffd4ff6c">
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="GPS"
         android:id="@+id/buttongps"
-        android:onClick="goGPS"
-        android:layout_alignParentBottom="true"
-        android:layout_toStartOf="@+id/buttonaccel" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:onClick="goGPS"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ACCEL"
         android:id="@+id/buttonaccel"
-        android:onClick="goACCEL"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="goACCEL"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Light"
         android:id="@+id/buttonlight"
-        android:onClick="goLight"
-        android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@+id/buttonaccel" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Monkeymondex"
-        android:id="@+id/dexView"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/buttonaccel"
         android:layout_centerHorizontal="true"
-        android:textSize="40sp"/>
+        android:layout_marginTop="69dp"
+        android:onClick="goLight"/>
 
-    <ExpandableListView
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/expandableListView"
-        android:layout_alignStart="@+id/dexView"
-        android:layout_above="@+id/buttonlight"
-        android:layout_below="@+id/dexView" />
-
+        android:text="Notif"
+        android:id="@+id/button"
+        android:layout_below="@+id/buttonlight"
+        android:layout_centerHorizontal="true"
+        android:onClick="goNotification"/>
 </RelativeLayout>
 <!-- From: file:/Users/Gardshol/Desktop/MAMN01/MonkeymondayZ/app/src/main/res/layout/activity_main.xml -->
