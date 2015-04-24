@@ -16,7 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MyExpandableListAdapter extends BaseExpandableListAdapter {
-
+    private static final int LONG_TIME = 10000; // 10 seconds
     private final SparseArray<Group> groups;
     public LayoutInflater inflater;
     public Activity activity;

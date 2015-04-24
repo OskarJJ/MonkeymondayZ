@@ -4,6 +4,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 
 public class CaughtActivity extends ActionBarActivity {
@@ -12,6 +13,12 @@ public class CaughtActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_caught);
+        setText();
+    }
+
+    private void setText() {
+       // TextView caughtView = (TextView) findViewById(R.id.textView);
+       // caughtView.setText("Defaulttext");
     }
 
 

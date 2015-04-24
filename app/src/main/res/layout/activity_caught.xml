@@ -7,5 +7,6 @@
     tools:context="nu.fml.monkeymondayz.CaughtActivity">
 
     <TextView android:text="Caught" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:id="@+id/caughtText" />
 </RelativeLayout>

@@ -15,7 +15,7 @@
         android:drawablePadding="5dp"
         android:gravity="center_vertical"
         android:text="@string/hello_world"
-        android:textSize="14sp"
+        android:textSize="20sp"
         android:textStyle="bold" >
     </TextView>
 

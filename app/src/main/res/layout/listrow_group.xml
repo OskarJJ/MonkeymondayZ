@@ -8,6 +8,6 @@
     android:paddingLeft="32dp"
     android:paddingTop="8dp"
     android:text="Test"
-    android:textSize="14sp"
+    android:textSize="30sp"
     android:textStyle="bold"
     android:checked="false" />
