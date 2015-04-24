@@ -2,16 +2,22 @@ package nu.fml.monkeymondayz;
 
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
 public class FightActivity extends ActionBarActivity {
     Data d = new Data();
     TextView myNameText;
+    private ImageView imgHostile;
+    private Monkey hostileMonkey;
+    private ProgressBar health;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,13 +25,22 @@ public class FightActivity extends ActionBarActivity {
         CancelNotification(this);
         setUpViews();
         update();
+        this.imgHostile = (ImageView) findViewById(R.id.imgHostile);
+        this.health = (ProgressBar) findViewById(R.id.prgHealth);
+        Intent i = getIntent();
+        String m = i.getStringExtra("apa");
+
+        this.hostileMonkey = new Monkey(this.getIntent().getStringExtra("apa"),this);
+        this.imgHostile.setImageDrawable(this.hostileMonkey.getDrawable());
+        this.health.setMax(hostileMonkey.getMaxHealth());
+        this.health.setProgress(hostileMonkey.getHealth());
     }
 
     private void setUpViews() {
-        myNameText = (TextView)findViewById(R.id.myNameTextView);
+        //myNameText = (TextView)findViewById(R.id.myNameTextView);
     }
     private void update() {
-        myNameText.setText(d.getApaName());
+       // myNameText.setText(d.getApaName());
     }
 
 

@@ -45,22 +45,25 @@ public class Monkey {
         int color = 0;
         boolean changeColor = false;
         PorterDuff.Mode filter = PorterDuff.Mode.SRC_ATOP;
-        switch (type) {
-            case Monkey.MONKEY_ASPHALT:
-                color = Color.parseColor("#44FF0000");
-                changeColor = true;
-                break;
-            case Monkey.MONKEY_FOREST:
-                color = Color.parseColor("#4400FF00");
-                changeColor = true;
-                break;
-            case Monkey.MONKEY_WATER:
-                color = Color.parseColor("#440000FF");
-                changeColor = true;
-                break;
-            default:
-                changeColor = false;
-                break;
+
+        if (type!=null) {
+            switch (type) {
+                case Monkey.MONKEY_ASPHALT:
+                    color = Color.parseColor("#44FF0000");
+                    changeColor = true;
+                    break;
+                case Monkey.MONKEY_FOREST:
+                    color = Color.parseColor("#4400FF00");
+                    changeColor = true;
+                    break;
+                case Monkey.MONKEY_WATER:
+                    color = Color.parseColor("#440000FF");
+                    changeColor = true;
+                    break;
+                default:
+                    changeColor = false;
+                    break;
+            }
         }
         if (changeColor) {
             monkeyImg.setColorFilter(color,filter);

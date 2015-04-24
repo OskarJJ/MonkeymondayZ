@@ -11,10 +11,12 @@ public class Data {
     String apaName;
 
     public Data() {
+        this.monkeymonMap.put("building",Monkey.MONKEY_ASPHALT);
         this.monkeymonMap.put("asphalt", Monkey.MONKEY_ASPHALT);
         this.monkeymonMap.put("forest", Monkey.MONKEY_FOREST);
         this.monkeymonMap.put("water", Monkey.MONKEY_WATER);
     }
+
     public String getApa(String s) {
         String apa = monkeymonMap.get(s);
         if (apa==null) {

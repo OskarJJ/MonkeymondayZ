@@ -67,12 +67,13 @@ public class MonkeyFinderService extends Service {
                 PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
                 Intent fIntent = new Intent(this, FightActivity.class);
-                fIntent.putExtra("MONKEY",d.getApa(t));
+                String monkeyName = d.getApa(t);
+                fIntent.putExtra("apa",monkeyName);
 
-                PendingIntent fightIntent = PendingIntent.getActivity(this, 0, fIntent, 0);
+                PendingIntent fightIntent = PendingIntent.getActivity(this, 0, fIntent, PendingIntent.FLAG_CANCEL_CURRENT);
                 Notification noti = new Notification.Builder(this)
                         .setContentTitle("A wild Monkeymon appeared" + "!")
-                        .setContentText(d.getApa(t)).setSmallIcon(R.mipmap.ic_launcher)
+                        .setContentText(monkeyName).setSmallIcon(R.mipmap.ic_launcher)
                         .setContentIntent(pIntent)
                         .setContentIntent(fightIntent)
                         .addAction(R.drawable.fig, "Fight", fightIntent)
