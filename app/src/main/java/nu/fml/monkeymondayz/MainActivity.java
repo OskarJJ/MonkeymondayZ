@@ -81,6 +81,7 @@ public class MainActivity extends Activity {
                     public void run() {
                         setContentView(R.layout.activity_main);
                         setupList();
+                        showHelpText();
                     }
                 });
             }
@@ -99,6 +100,10 @@ public class MainActivity extends Activity {
         return true;
     }
 
+    public void goFight(View view) {
+        Intent intent = new Intent(this, FightActivity.class);
+        startActivity(intent);
+    }
 
     public void goGPS(View view) {
         Intent intent = new Intent(this, GPSActivity.class);
@@ -151,6 +156,13 @@ public class MainActivity extends Activity {
         MyExpandableListAdapter adapter = new MyExpandableListAdapter(this,
                 groups);
         listView.setAdapter(adapter);
+    }
+
+    private void showHelpText() {
+        String help = "You are now playing the MonkeymondayZ life-simulator. You will be notified once a monkeymon appears, so you can minimize this application and go about your normal life while you wait!";
+        for (int i = 0;i<2;i++) {
+            Toast.makeText(this,help,Toast.LENGTH_LONG).show();
+        }
     }
 
     public void createData() {
