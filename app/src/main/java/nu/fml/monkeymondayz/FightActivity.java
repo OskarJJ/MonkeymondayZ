@@ -1,5 +1,6 @@
 package nu.fml.monkeymondayz;
 
+import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
@@ -7,12 +8,13 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
-public class FightActivity extends ActionBarActivity {
+public class FightActivity extends Activity {
     Data d = new Data();
     TextView myNameText;
     private ImageView imgHostile;
@@ -34,6 +36,8 @@ public class FightActivity extends ActionBarActivity {
         this.imgHostile.setImageDrawable(this.hostileMonkey.getDrawable());
         this.health.setMax(hostileMonkey.getMaxHealth());
         this.health.setProgress(hostileMonkey.getHealth());
+
+
     }
 
     private void setUpViews() {
@@ -57,17 +61,34 @@ public class FightActivity extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
     //Stoppar notificationen, kan innebära problems
     public static void CancelNotification(Context ctx) {
         NotificationManager notifManager= (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
         notifManager.cancelAll();
+    }
+
+    public boolean onTouchEvent(MotionEvent event) {
+        if (event.getAction()!=MotionEvent.ACTION_DOWN) {
+            return true;
+        }
+
+        if (this.health!=null) {
+            if (this.hostileMonkey!=null) {
+                this.hostileMonkey.doDamage(1);
+                this.health.setProgress(this.hostileMonkey.getHealth());
+                if (this.hostileMonkey.getHealth()<=0) {
+                    Intent prison = new Intent(this,LightActivity.class);
+                    startActivity(prison);
+                    this.finish();
+                }
+            }
+        }
+        return true;
     }
 }
