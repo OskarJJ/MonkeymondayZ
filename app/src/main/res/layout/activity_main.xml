@@ -7,42 +7,6 @@
     android:id="@+id/main123"
     android:background="#ffffbf6a">
 
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="GPS"
-        android:id="@+id/buttongps"
-        android:onClick="goGPS" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ACCEL"
-        android:id="@+id/buttonaccel"
-        android:onClick="goACCEL" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Light"
-        android:id="@+id/buttonlight"
-        android:onClick="goLight" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Fight"
-        android:id="@+id/btnFight"
-        android:onClick="goFight"/>
-
-    </LinearLayout>
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -56,11 +20,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listView"
-        android:layout_above="@+id/buttongps"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/dexView" />
+        android:layout_below="@id/dexView" />
 
-
+    <TextView android:id="@+id/txtHowto"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="You are now playing the MonkeymondayZ life-simulator. You will be notified once a monkeymon appears, so you can minimize this application and go about your normal life while you wait!"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_alignParentBottom="true"
+        />
 
 
 </RelativeLayout>

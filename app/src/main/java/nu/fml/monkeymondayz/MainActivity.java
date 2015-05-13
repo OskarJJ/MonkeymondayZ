@@ -6,26 +6,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
-import android.hardware.SensorManager;
-import android.location.LocationManager;
-import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Handler;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.SparseArray;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.ListView;
 import android.widget.Toast;
 
 
@@ -81,7 +69,6 @@ public class MainActivity extends Activity {
                     public void run() {
                         setContentView(R.layout.activity_main);
                         setupList();
-                        showHelpText();
                     }
                 });
             }
@@ -89,7 +76,6 @@ public class MainActivity extends Activity {
         }.execute();
         Intent monkey = new Intent(this, MonkeyFinderService.class);
         startService(monkey);
-
     }
 
 
@@ -98,27 +84,6 @@ public class MainActivity extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
-    }
-
-    public void goFight(View view) {
-        Intent intent = new Intent(this, FightActivity.class);
-        startActivity(intent);
-    }
-
-    public void goGPS(View view) {
-        Intent intent = new Intent(this, GPSActivity.class);
-        startActivity(intent);
-    }
-
-    public void goACCEL(View view) {
-        Intent intent = new Intent(this, ACCELActivity.class);
-        startActivity(intent);
-//        mySound.start();
-    }
-
-    public void goLight(View view) {
-        Intent intent = new Intent(this, LightActivity.class);
-        startActivity(intent);
     }
 
     @Override
@@ -156,13 +121,6 @@ public class MainActivity extends Activity {
         MyExpandableListAdapter adapter = new MyExpandableListAdapter(this,
                 groups);
         listView.setAdapter(adapter);
-    }
-
-    private void showHelpText() {
-        String help = "You are now playing the MonkeymondayZ life-simulator. You will be notified once a monkeymon appears, so you can minimize this application and go about your normal life while you wait!";
-        for (int i = 0;i<2;i++) {
-            Toast.makeText(this,help,Toast.LENGTH_LONG).show();
-        }
     }
 
     public void createData() {

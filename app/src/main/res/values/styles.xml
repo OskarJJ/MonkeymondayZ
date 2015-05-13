@@ -5,4 +5,9 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="CustomProgressBar" parent="@style/Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:minHeight">20dip</item>
+        <item name="android:maxHeight">30dip</item>
+    </style>
+
 </resources>

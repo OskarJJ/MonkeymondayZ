@@ -4,6 +4,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="#ffffbf6a"
     tools:context="nu.fml.monkeymondayz.FightActivity"
     android:id="@+id/a123123">
 
@@ -12,12 +13,23 @@
         android:layout_height="wrap_content"
         android:id="@+id/imgHostile"
         android:layout_alignParentStart="true"/>
+    
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imgGestureHelp"
+        android:scaleType="fitStart"
+        android:scaleX="1"
+        android:scaleY="1"
+        android:layout_gravity="left|top"
+        android:layout_alignLeft="@id/imgHostile"
+        android:layout_alignTop="@id/imgHostile"/>
 
     <ProgressBar
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="fill_parent"
-        android:layout_height="10dp"
+        android:layout_height="50dp"
         android:id="@+id/prgHealth"
+        style="@style/CustomProgressBar"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/imgHostile"

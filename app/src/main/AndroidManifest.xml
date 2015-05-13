@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="nu.fml.monkeymondayz" >
+    package="nu.fml.monkeymondayz" android:installLocation="auto" >
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -23,32 +23,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name=".GPSActivity"
-            android:label="@string/title_activity_gps"
-            android:parentActivityName=".MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="nu.fml.monkeymondayz.MainActivity" />
-        </activity>
-        <activity
-            android:name=".ACCELActivity"
-            android:label="@string/title_activity_accel"
-            android:parentActivityName=".MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="nu.fml.monkeymondayz.MainActivity" />
-        </activity>
-        <activity
-            android:name=".GpsMapActivity"
-            android:label="GpsMapActivity"
-            android:parentActivityName=".GPSActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="nu.fml.monkeymondayz.GPSActivity" />
-        </activity>
-        <activity
-            android:name=".LightActivity"
+            android:name=".CatchActivity"
             android:label="LightActivity"
             android:parentActivityName=".MainActivity" >
             <meta-data
@@ -63,13 +40,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="nu.fml.monkeymondayz.MainActivity" />
         </activity>
-
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-        <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyBMvgl22fzVnpAT1WU-I6IPgQGwnAgJ4NI" />
 
         <activity
             android:name=".CaughtActivity"

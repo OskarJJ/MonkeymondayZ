@@ -4,16 +4,20 @@ import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.AnimationDrawable;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Handler;
 import android.os.Vibrator;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -29,6 +33,8 @@ public class FightActivity extends Activity {
     private FightAccelerometer fightListener;
     private SensorManager smgr;
     private Sensor acc;
+
+    private String monkey;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +45,10 @@ public class FightActivity extends Activity {
         this.imgHostile = (ImageView) findViewById(R.id.imgHostile);
         this.health = (ProgressBar) findViewById(R.id.prgHealth);
         Intent i = getIntent();
-        String m = i.getStringExtra("apa");
+        monkey = i.getStringExtra("apa");
+
+        health.getProgressDrawable().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+        health.setScaleY(3.0f);
 
         this.hostileMonkey = new Monkey(this.getIntent().getStringExtra("apa"),this);
         this.imgHostile.setImageDrawable(this.hostileMonkey.getDrawable());
@@ -47,6 +56,7 @@ public class FightActivity extends Activity {
         this.health.setProgress(hostileMonkey.getHealth());
 
         /* Debug code */
+
         TextView txtValues = (TextView) findViewById(R.id.txtAccelerometer);
         smgr = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         acc = smgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -54,13 +64,42 @@ public class FightActivity extends Activity {
         smgr.registerListener(fightListener,acc,SensorManager.SENSOR_DELAY_UI);
 
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
+        animImg = (ImageView) findViewById(R.id.imgGestureHelp);
+        animImg.setBackgroundResource(R.drawable.hitanimation);
+        animation = (AnimationDrawable) animImg.getBackground();
+        animation.start();
+
+        removeWhenDone(animation);
+    }
+
+    private ImageView animImg;
+    AnimationDrawable animation;
+
+    private void removeWhenDone(AnimationDrawable anim) {
+        final AnimationDrawable a = anim;
+        Handler h = new Handler();
+        h.postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                if (a.getCurrent()!=a.getFrame(a.getNumberOfFrames()-1)) {
+                    removeWhenDone(a);
+                }else{
+                    removeAnimation();
+                }
+            }
+        },300);
+    }
+
+    private void removeAnimation() {
+        animation.stop();
+        animImg.setVisibility(View.GONE);
     }
 
     private void setUpViews() {
-        //myNameText = (TextView)findViewById(R.id.myNameTextView);
     }
     private void update() {
-       // myNameText.setText(d.getApaName());
     }
 
 
@@ -73,17 +112,13 @@ public class FightActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
-    //Stoppar notificationen, kan innebära problems
+
     public static void CancelNotification(Context ctx) {
         NotificationManager notifManager= (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
         notifManager.cancelAll();
@@ -93,25 +128,12 @@ public class FightActivity extends Activity {
         if (event.getAction()!=MotionEvent.ACTION_DOWN) {
             return true;
         }
-
-        if (this.health!=null) {
-            if (this.hostileMonkey!=null) {
-                this.hostileMonkey.doDamage(1);
-                this.health.setProgress(this.hostileMonkey.getHealth());
-                if (this.hostileMonkey.getHealth()<=0) {
-                    Intent prison = new Intent(this,LightActivity.class);
-                    startActivity(prison);
-                    this.finish();
-                }
-            }
-        }
         return true;
     }
 
     public void hitOnHead() {
         vibrator.vibrate(100);
         this.dmgMonkey(3);
-       // this.sleep();
     }
 
     public void smackOnNose() {
@@ -131,12 +153,13 @@ public class FightActivity extends Activity {
     private void dmgMonkey(int dmg) {
         if (this.health!=null) {
             if (this.hostileMonkey!=null) {
-                this.hostileMonkey.doDamage(1);
+                this.hostileMonkey.doDamage(dmg);
                 this.health.setProgress(this.hostileMonkey.getHealth());
                 if (this.hostileMonkey.getHealth()<=0) {
                     long pattern[] = {0,200,100,200};
                     vibrator.vibrate(pattern,-1);
-                    Intent prison = new Intent(this,LightActivity.class);
+                    Intent prison = new Intent(this,CatchActivity.class);
+                    prison.putExtra("monkey",monkey);
                     this.finish();
                     startActivity(prison);
                 }

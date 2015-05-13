@@ -1,19 +1,37 @@
 package nu.fml.monkeymondayz;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 
-public class CaughtActivity extends ActionBarActivity {
-
+public class CaughtActivity extends Activity {
+    private TextView txtCaught;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_caught);
-        setText();
+        String action = getIntent().getAction();
+
+        txtCaught = (TextView) findViewById(R.id.caughtText);
+        String monkeyName = getIntent().getStringExtra("monkey");
+
+        switch (action) {
+            case "OK":
+                txtCaught.setText(String.format("You caught the %s!",monkeyName));
+                break;
+            case "FAIL":
+                txtCaught.setText(String.format("The %s escaped! Maybe some other time?",monkeyName));
+                break;
+            default:
+                txtCaught.setText("Something went wrong :/");
+                break;
+        }
     }
 
     private void setText() {
@@ -42,5 +60,12 @@ public class CaughtActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void doContinue(View view) {
+        Intent monkey = new Intent(this, MonkeyFinderService.class);
+        stopService(monkey);
+        startService(monkey);
+        this.finish();
     }
 }

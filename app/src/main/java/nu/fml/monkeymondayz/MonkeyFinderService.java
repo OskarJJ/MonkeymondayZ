@@ -27,17 +27,24 @@ public class MonkeyFinderService extends Service {
     private Location currentLocation;
     private LocationManager l;
     private Timer checkTimer;
+    private MonkeyListener monkeyListener;
 
     public void onCreate() {
         super.onCreate();
         this.l = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        l.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,5000,1,new MonkeyListener(this));
+        System.out.println("MonkeyFinderService is running");
+        monkeyListener = new MonkeyListener(this);
+        l.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,5000,1,monkeyListener);
         this.checkTimer = new Timer();
         this.checkTimer.schedule(new TimerTask() {
             public void run() {
                 checkLocation();
             }
         },0,20000);
+    }
+
+    public void onDestroy() {
+        l.removeUpdates(monkeyListener);
     }
 
     private void checkLocation() {
@@ -60,9 +67,6 @@ public class MonkeyFinderService extends Service {
 
                 Data d = new Data();
 
-                //Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-                Uri alarmSound = Uri.parse("android.resource://" + getPackageName() + "/" + R.drawable.alert);
-
                 Intent intent = new Intent(this, MainActivity.class);
                 PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
@@ -78,17 +82,15 @@ public class MonkeyFinderService extends Service {
                         .setContentIntent(fightIntent)
                         .addAction(R.drawable.fig, "Fight", fightIntent)
                         .addAction(R.drawable.run, "Run", pIntent)
+                        .setDefaults(Notification.DEFAULT_ALL)
                         .build();
                 NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
                 noti.flags |= Notification.FLAG_AUTO_CANCEL;
-                noti.sound = alarmSound;
 
                 Vibrator s = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 if (s.hasVibrator()) {
                     s.vibrate(4000);
                 }
-
-
                 notificationManager.notify(0, noti);
             }
         }
