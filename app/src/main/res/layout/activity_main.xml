@@ -23,13 +23,5 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/dexView" />
 
-    <TextView android:id="@+id/txtHowto"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="You are now playing the MonkeymondayZ life-simulator. You will be notified once a monkeymon appears, so you can minimize this application and go about your normal life while you wait!"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:layout_alignParentBottom="true"
-        />
-
 
 </RelativeLayout>

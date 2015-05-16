@@ -9,6 +9,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
@@ -30,6 +31,7 @@ public class CatchActivity extends Activity implements SensorEventListener {
     private Sensor sensor;
     private Vibrator vibrate;
     private String monkey;
+    private MediaPlayer mp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,9 @@ public class CatchActivity extends Activity implements SensorEventListener {
         sensor = mgr.getDefaultSensor(Sensor.TYPE_PROXIMITY);
         vibrate = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
+        mp = MediaPlayer.create(this,R.raw.stressad);
+        mp.setLooping(true);
+
         this.lastCheck = System.currentTimeMillis();
         this.startCheck = System.currentTimeMillis();
         final Handler h = new Handler();
@@ -66,9 +71,21 @@ public class CatchActivity extends Activity implements SensorEventListener {
                 }
                 if (isCatching()) {
                     if (vibrate.hasVibrator()) {
+                        float vol = (float)checkIt/(float)10000;
+                        mp.setVolume(vol,vol);
+                        System.out.println("Setting volume to: " + vol);
                         vibrate.vibrate((checkIt/125));
+                        if (!mp.isPlaying()) {
+                            System.out.println("Not playing, start it!");
+                            mp.start();
+                        }
                     }
                     totalTime+=diff;
+                }else{
+                    if (mp.isPlaying()) {
+                        System.out.println("is playing, pause it!");
+                        mp.pause();
+                    }
                 }
                 lastCheck = now;
                 System.out.println(String.format("now=%d, diff=%d, checkIt=%d",now,diff,checkIt));
@@ -92,6 +109,8 @@ public class CatchActivity extends Activity implements SensorEventListener {
         }else{
             i.setAction("FAIL");
         }
+        mp.stop();
+        mp.release();
         System.out.println(String.format("Captured for a total of %d seconds",total));
         this.finish();
         startActivity(i);

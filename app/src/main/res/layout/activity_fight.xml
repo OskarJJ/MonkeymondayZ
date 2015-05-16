@@ -14,16 +14,7 @@
         android:id="@+id/imgHostile"
         android:layout_alignParentStart="true"/>
     
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imgGestureHelp"
-        android:scaleType="fitStart"
-        android:scaleX="1"
-        android:scaleY="1"
-        android:layout_gravity="left|top"
-        android:layout_alignLeft="@id/imgHostile"
-        android:layout_alignTop="@id/imgHostile"/>
+
 
     <ProgressBar
         android:layout_width="fill_parent"
@@ -45,4 +36,15 @@
         android:id="@+id/txtAccelerometer"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imgGestureHelp"
+        android:scaleType="fitStart"
+        android:scaleX="0.8"
+        android:scaleY="0.8"
+        android:layout_gravity="left|top"
+        android:layout_alignLeft="@id/imgHostile"
+        android:layout_alignTop="@id/imgHostile"/>
 </RelativeLayout>

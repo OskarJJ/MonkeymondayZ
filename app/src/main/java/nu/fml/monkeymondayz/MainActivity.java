@@ -1,8 +1,10 @@
 package nu.fml.monkeymondayz;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -74,6 +76,13 @@ public class MainActivity extends Activity {
             }
 
         }.execute();
+
+
+
+
+    }
+
+    private void startMonkey() {
         Intent monkey = new Intent(this, MonkeyFinderService.class);
         startService(monkey);
     }
@@ -121,6 +130,18 @@ public class MainActivity extends Activity {
         MyExpandableListAdapter adapter = new MyExpandableListAdapter(this,
                 groups);
         listView.setAdapter(adapter);
+
+        AlertDialog.Builder b = new AlertDialog.Builder(this);
+        b.setMessage(getString(R.string.str_guide));
+        b.setPositiveButton("Got it!", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                startMonkey();
+            }
+        });
+
+        b.create().show();
     }
 
     public void createData() {

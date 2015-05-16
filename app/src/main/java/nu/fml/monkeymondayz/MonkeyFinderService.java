@@ -34,7 +34,7 @@ public class MonkeyFinderService extends Service {
         this.l = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         System.out.println("MonkeyFinderService is running");
         monkeyListener = new MonkeyListener(this);
-        l.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,5000,1,monkeyListener);
+        l.requestLocationUpdates(LocationManager.GPS_PROVIDER,5000,1,monkeyListener);
         this.checkTimer = new Timer();
         this.checkTimer.schedule(new TimerTask() {
             public void run() {

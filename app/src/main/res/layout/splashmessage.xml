@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:id="@+id/relSplash">
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:scaleX="0.5"
+        android:scaleY="0.5"
+        android:id="@+id/imgFrontApa"
+        android:src="@mipmap/apa"/>
+    <TextView
+        android:layout_width="fill_parent"
+        android:id="@+id/txtGuideText"
+        android:layout_height="wrap_content"
+        android:text="@string/str_guide"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/imgFrontApa"/>
+
+</RelativeLayout>

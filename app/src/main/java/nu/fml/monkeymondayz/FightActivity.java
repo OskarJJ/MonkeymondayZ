@@ -18,12 +18,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
-public class FightActivity extends Activity {
+public class FightActivity extends Activity implements SensorEventListener {
     Data d = new Data();
     TextView myNameText;
     private ImageView imgHostile;
@@ -33,6 +37,7 @@ public class FightActivity extends Activity {
     private FightAccelerometer fightListener;
     private SensorManager smgr;
     private Sensor acc;
+    private Sensor prox;
 
     private String monkey;
     @Override
@@ -66,15 +71,26 @@ public class FightActivity extends Activity {
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
         animImg = (ImageView) findViewById(R.id.imgGestureHelp);
-        animImg.setBackgroundResource(R.drawable.hitanimation);
-        animation = (AnimationDrawable) animImg.getBackground();
-        animation.start();
+        animImg.setImageResource(R.drawable.m1);
 
-        removeWhenDone(animation);
+        animation = AnimationUtils.loadAnimation(this,R.anim.rotimg);
+        animImg.startAnimation(animation);
+        //animImg.setBackgroundResource(R.drawable.hitanimation);
+        //animation = (AnimationDrawable) animImg.getBackground();
+        //animation.start();
+
+        //Animation rotAnim = new RotateAnimation(0f,45f,Animation.RELATIVE_TO_SELF,animImg.getWidth()/2,Animation.RELATIVE_TO_SELF,animImg.getHeight()/2);
+        //rotAnim.setInterpolator(new LinearInterpolator());
+        //animImg.startAnimation(rotAnim);
+
+        prox = smgr.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+        smgr.registerListener(this,prox,SensorManager.SENSOR_DELAY_FASTEST);
+
+        //removeWhenDone(animation);
     }
 
     private ImageView animImg;
-    AnimationDrawable animation;
+    Animation animation;
 
     private void removeWhenDone(AnimationDrawable anim) {
         final AnimationDrawable a = anim;
@@ -93,7 +109,7 @@ public class FightActivity extends Activity {
     }
 
     private void removeAnimation() {
-        animation.stop();
+        animation.cancel();
         animImg.setVisibility(View.GONE);
     }
 
@@ -123,10 +139,13 @@ public class FightActivity extends Activity {
         NotificationManager notifManager= (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
         notifManager.cancelAll();
     }
-
+    private boolean isTouching = false;
     public boolean onTouchEvent(MotionEvent event) {
-        if (event.getAction()!=MotionEvent.ACTION_DOWN) {
-            return true;
+        System.out.println(event);
+        if (event.getAction()==MotionEvent.ACTION_DOWN) {
+            this.isTouching = true;
+        }else if (event.getAction()==MotionEvent.ACTION_UP) {
+            this.isTouching = false;
         }
         return true;
     }
@@ -175,6 +194,23 @@ public class FightActivity extends Activity {
     public void onResume() {
         super.onResume();
         smgr.registerListener(fightListener,acc,SensorManager.SENSOR_DELAY_UI);
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        float[] val = event.values;
+        if (val[0]<prox.getMaximumRange()) {
+            System.out.println("val under max range");
+            if (this.isTouching) {
+                System.out.println("is touching :D");
+                hitOnHead();
+            }
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
     }
 
     private class FightAccelerometer implements SensorEventListener {

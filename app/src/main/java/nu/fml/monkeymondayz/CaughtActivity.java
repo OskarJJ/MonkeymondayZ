@@ -2,6 +2,7 @@ package nu.fml.monkeymondayz;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -20,18 +21,29 @@ public class CaughtActivity extends Activity {
 
         txtCaught = (TextView) findViewById(R.id.caughtText);
         String monkeyName = getIntent().getStringExtra("monkey");
-
+        int sound = 0;
         switch (action) {
             case "OK":
+                sound = R.raw.uppgiven;
                 txtCaught.setText(String.format("You caught the %s!",monkeyName));
                 break;
             case "FAIL":
+                sound = R.raw.skadeglad;
                 txtCaught.setText(String.format("The %s escaped! Maybe some other time?",monkeyName));
                 break;
             default:
                 txtCaught.setText("Something went wrong :/");
                 break;
         }
+
+        MediaPlayer mp = MediaPlayer.create(this,sound);
+        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mp.release();
+            }
+        });
+        mp.start();
     }
 
     private void setText() {

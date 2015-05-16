@@ -8,4 +8,5 @@
     <string name="title_activity_gps_map">GpsMapActivity</string>
     <string name="title_activity_light">LightActivity</string>
     <string name="title_activity_fight">FightActivity</string>
+    <string name="str_guide">You are now playing the MonkeymondayZ life-simulator. You will be notified once a monkeymon appears, so you can minimize this application and go about your normal life while you wait!</string>
 </resources>
