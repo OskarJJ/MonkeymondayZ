@@ -28,23 +28,27 @@
         android:max="100"
         android:progress="2" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="AccelerometerValues"
-        android:id="@+id/txtAccelerometer"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
+    <LinearLayout
+        android:layout_below="@id/imgHostile"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imgGestureHelp"
-        android:scaleType="fitStart"
-        android:scaleX="0.8"
-        android:scaleY="0.8"
-        android:layout_gravity="left|top"
-        android:layout_alignLeft="@id/imgHostile"
-        android:layout_alignTop="@id/imgHostile"/>
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Health:"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imgGestureHelp"
+            android:scaleType="fitStart"
+            android:scaleX="0.8"
+            android:scaleY="0.8"
+            android:layout_gravity="left|top"
+           />
+
+    </LinearLayout>
+
 </RelativeLayout>

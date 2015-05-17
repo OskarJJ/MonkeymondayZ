@@ -21,7 +21,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class CatchActivity extends Activity implements SensorEventListener {
-
+    private static final long HANDLER_DELAY = 100;
     private TextView txtCatchText;
     private Animation textAnimation;
     private AnimationDrawable imgAnimation;
@@ -89,9 +89,9 @@ public class CatchActivity extends Activity implements SensorEventListener {
                 }
                 lastCheck = now;
                 System.out.println(String.format("now=%d, diff=%d, checkIt=%d",now,diff,checkIt));
-                h.postDelayed(this,200);
+                h.postDelayed(this,HANDLER_DELAY);
             }
-        },200);
+        },HANDLER_DELAY);
     }
 
     long lastCheck,startCheck;

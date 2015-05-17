@@ -15,6 +15,8 @@ import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
@@ -125,23 +127,42 @@ public class MainActivity extends Activity {
 
     //LISTVIEW
     private void setupList() {
+        final SharedPreferences pref = getSharedPreferences("tell",0);
+        boolean showAlert = pref.getBoolean("show",true);
+
         createData();
         ExpandableListView listView = (ExpandableListView) findViewById(R.id.listView);
         MyExpandableListAdapter adapter = new MyExpandableListAdapter(this,
                 groups);
         listView.setAdapter(adapter);
 
-        AlertDialog.Builder b = new AlertDialog.Builder(this);
-        b.setMessage(getString(R.string.str_guide));
-        b.setPositiveButton("Got it!", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                startMonkey();
-            }
-        });
+        if (showAlert) {
+            View checkBoxView = View.inflate(this, R.layout.splashmessage, null);
+            CheckBox box = (CheckBox) checkBoxView.findViewById(R.id.checkDont);
+            box.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    SharedPreferences.Editor e = pref.edit();
+                    e.putBoolean("show",!isChecked);
+                    e.commit();
+                }
+            });
 
-        b.create().show();
+            AlertDialog.Builder b = new AlertDialog.Builder(this);
+            b.setMessage(getString(R.string.str_guide));
+            b.setPositiveButton("Got it!", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    startMonkey();
+                }
+            });
+            b.setView(checkBoxView);
+
+            b.create().show();
+        }else{
+            startMonkey();
+        }
     }
 
     public void createData() {

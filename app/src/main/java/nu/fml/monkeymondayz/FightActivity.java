@@ -62,10 +62,10 @@ public class FightActivity extends Activity implements SensorEventListener {
 
         /* Debug code */
 
-        TextView txtValues = (TextView) findViewById(R.id.txtAccelerometer);
+       // TextView txtValues = (TextView) findViewById(R.id.txtAccelerometer);
         smgr = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         acc = smgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        fightListener = new FightAccelerometer(txtValues,this);
+        fightListener = new FightAccelerometer(null,this);
         smgr.registerListener(fightListener,acc,SensorManager.SENSOR_DELAY_UI);
 
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
@@ -214,10 +214,10 @@ public class FightActivity extends Activity implements SensorEventListener {
     }
 
     private class FightAccelerometer implements SensorEventListener {
-        private TextView report;
+        //private TextView report;
         private FightActivity fighter;
         public FightAccelerometer(TextView values,FightActivity fighter) {
-            this.report = values;
+            //this.report = values;
             this.fighter = fighter;
         }
 
@@ -233,7 +233,7 @@ public class FightActivity extends Activity implements SensorEventListener {
 
             int inclination = (int) Math.round(Math.toDegrees(Math.acos(g[2])));
             if (inclination < 25 || inclination > 155) {
-                report.setText("Flat: " + inclination);
+                //report.setText("Flat: " + inclination);
 
                 if (!hitOnNose) {
                     hitOnNose = true;
@@ -241,7 +241,7 @@ public class FightActivity extends Activity implements SensorEventListener {
 
             }else{
                 int tilt = (int) Math.round(Math.toDegrees(Math.atan2(g[0], g[1])));
-                report.setText("Not flat: " + inclination + ",tilt=" + tilt);
+               //report.setText("Not flat: " + inclination + ",tilt=" + tilt);
                 if (!isTiltedDown && tilt>80) {
                     this.isTiltedDown=true;
                 }
