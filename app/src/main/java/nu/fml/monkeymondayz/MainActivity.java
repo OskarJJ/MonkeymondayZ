@@ -32,9 +32,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        Intent notificationIntent = new Intent(this, NotificationActivity.class);
         final Handler handler = new Handler();
-//        mySound = MediaPlayer.create(this, R.raw.apa);
 
         new AsyncTask<Void, Void, Void>() {
             protected Void doInBackground(Void... params) {
@@ -58,13 +56,6 @@ public class MainActivity extends Activity {
                 editor.putBoolean(Constants.PREF_LOCATION_NETWORK, hasNetworkLocation);
 
                 editor.commit();
-            /*
-                try {
-                    Thread.sleep(4000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                */
                 return null;
             }
 
@@ -99,16 +90,11 @@ public class MainActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -172,15 +158,21 @@ public class MainActivity extends Activity {
         Group groupVatten = new Group("Vatten");
 
         groupAsfalt.children.add("Asfaltsapa");
-        groupAsfalt.children.add("apajävel");
+        groupAsfalt.children.add("Vanligapa");
+        groupAsfalt.children.add("Marknäraapa");
         groups.append(0, groupAsfalt);
 
 
-        groupSkog.children.add("Apatomas");
+        groupSkog.children.add("Oskarsapa");
+        groupSkog.children.add("Grönapa");
+        groupSkog.children.add("Grönareapa");
+        groupSkog.children.add("Grönasteapa");
         groups.append(1, groupSkog);
 
 
-        groupVatten.children.add("Empty");
+        groupVatten.children.add("Vattenapa");
+        groupVatten.children.add("Koiapa");
+        groupVatten.children.add("Gäddapa");
         groups.append(2, groupVatten);
         }
 

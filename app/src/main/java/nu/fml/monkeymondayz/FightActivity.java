@@ -27,7 +27,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
-public class FightActivity extends Activity implements SensorEventListener {
+public class FightActivity extends Activity {
     Data d = new Data();
     TextView myNameText;
     private ImageView imgHostile;
@@ -75,18 +75,9 @@ public class FightActivity extends Activity implements SensorEventListener {
 
         animation = AnimationUtils.loadAnimation(this,R.anim.rotimg);
         animImg.startAnimation(animation);
-        //animImg.setBackgroundResource(R.drawable.hitanimation);
-        //animation = (AnimationDrawable) animImg.getBackground();
-        //animation.start();
 
-        //Animation rotAnim = new RotateAnimation(0f,45f,Animation.RELATIVE_TO_SELF,animImg.getWidth()/2,Animation.RELATIVE_TO_SELF,animImg.getHeight()/2);
-        //rotAnim.setInterpolator(new LinearInterpolator());
-        //animImg.startAnimation(rotAnim);
-
-        prox = smgr.getDefaultSensor(Sensor.TYPE_PROXIMITY);
-        smgr.registerListener(this,prox,SensorManager.SENSOR_DELAY_FASTEST);
-
-        //removeWhenDone(animation);
+        //prox = smgr.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+        //smgr.registerListener(this,prox,SensorManager.SENSOR_DELAY_FASTEST);
     }
 
     private ImageView animImg;
@@ -139,7 +130,7 @@ public class FightActivity extends Activity implements SensorEventListener {
         NotificationManager notifManager= (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
         notifManager.cancelAll();
     }
-    private boolean isTouching = false;
+   /* private boolean isTouching = false;
     public boolean onTouchEvent(MotionEvent event) {
         System.out.println(event);
         if (event.getAction()==MotionEvent.ACTION_DOWN) {
@@ -148,11 +139,11 @@ public class FightActivity extends Activity implements SensorEventListener {
             this.isTouching = false;
         }
         return true;
-    }
+    }*/
 
     public void hitOnHead() {
         vibrator.vibrate(100);
-        this.dmgMonkey(3);
+        this.dmgMonkey(2);
     }
 
     public void smackOnNose() {
@@ -196,13 +187,13 @@ public class FightActivity extends Activity implements SensorEventListener {
         smgr.registerListener(fightListener,acc,SensorManager.SENSOR_DELAY_UI);
     }
 
-    @Override
+    /*@Override
     public void onSensorChanged(SensorEvent event) {
         float[] val = event.values;
         if (val[0]<prox.getMaximumRange()) {
-            System.out.println("val under max range");
+            //System.out.println("val under max range");
             if (this.isTouching) {
-                System.out.println("is touching :D");
+                //System.out.println("is touching :D");
                 hitOnHead();
             }
         }
@@ -211,7 +202,7 @@ public class FightActivity extends Activity implements SensorEventListener {
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
-    }
+    }*/
 
     private class FightAccelerometer implements SensorEventListener {
         //private TextView report;

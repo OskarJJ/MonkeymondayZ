@@ -12,9 +12,9 @@ import android.graphics.drawable.Drawable;
  */
 public class Monkey {
     public static final String MONKEY_ASPHALT = "Asfaltsapa";
-    public static final String MONKEY_FOREST = "Grönapa";
+    public static final String MONKEY_FOREST = "Skogsapa";
     public static final String MONKEY_WATER = "Fiskapa";
-    public static final String MONKEY_DEFAULT = "Retardapa";
+    public static final String MONKEY_DEFAULT = "Exceptionapa";
 
     private String type;
     private Drawable monkeyImage;

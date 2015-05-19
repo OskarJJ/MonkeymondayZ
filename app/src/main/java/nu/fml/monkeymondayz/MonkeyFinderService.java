@@ -17,6 +17,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Vibrator;
+import android.support.v4.app.NotificationCompat;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -67,8 +68,8 @@ public class MonkeyFinderService extends Service {
 
                 Data d = new Data();
 
-                Intent intent = new Intent(this, MainActivity.class);
-                PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
+                Intent intent = new Intent(this, RunFromMonkey.class);
+                PendingIntent pIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
 
                 Intent fIntent = new Intent(this, FightActivity.class);
                 String monkeyName = d.getApa(t);
@@ -79,6 +80,7 @@ public class MonkeyFinderService extends Service {
                         .setContentTitle("A wild Monkeymon appeared" + "!")
                         .setContentText(monkeyName).setSmallIcon(R.mipmap.ic_launcher)
                         .setContentIntent(pIntent)
+                        .setPriority(NotificationCompat.PRIORITY_MAX)
                         .setContentIntent(fightIntent)
                         .addAction(R.drawable.fig, "Fight", fightIntent)
                         .addAction(R.drawable.run, "Run", pIntent)
@@ -91,7 +93,7 @@ public class MonkeyFinderService extends Service {
                 if (s.hasVibrator()) {
                     s.vibrate(4000);
                 }
-                notificationManager.notify(0, noti);
+                notificationManager.notify(50, noti);
             }
         }
     }
