@@ -59,7 +59,7 @@
             android:enabled="true"
             android:exported="false" >
         </service>
-        <receiver android:name=".RunFromMonkey"/>
+        <receiver android:name=".RunFromMonkey" android:exported="true"/>
     </application>
 
 </manifest>
